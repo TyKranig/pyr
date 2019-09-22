@@ -1,7 +1,7 @@
 import requests
 import json
-import endpoints
-from key import get_key
+from api import endpoints
+from api import get_key
 
 class ApiCall:
     

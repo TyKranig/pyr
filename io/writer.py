@@ -1,4 +1,5 @@
-from dotaApi import ApiCall
+import sys
+from api.dotaApi import ApiCall
 import json
 
 api = ApiCall()
