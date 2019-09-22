@@ -1,4 +1,6 @@
-import sys
+import sys, os
+print(os.path.join(os.path.realpath(__file__)))
+sys.path.append(os.path.join(os.path.dirname(__file__), "../api/"))
 from api.dotaApi import ApiCall
 import json
 
