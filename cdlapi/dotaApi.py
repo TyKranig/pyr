@@ -1,11 +1,12 @@
 import requests
 import json
-from api import endpoints
-from api import get_key
+from cdlapi import endpoints
+from cdlapi import get_key
 
 class ApiCall:
     
     key = get_key()
+    print(key)
 
     def getLeague(self, **kwargs):
         kwargs['key'] = self.key
