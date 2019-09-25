@@ -28,3 +28,7 @@ Goals for first version
 
 Struggles
     - getting player names from account id's not easy with everyone changing names all the time
+    - certificates based on what network the scritp is ran on
+
+    9/25/2019
+Attempted to hit the api from behind a firewall, didn't work, going to move forward running the api hits on an open network, outputing match results to a file then have a second script parse the json files
