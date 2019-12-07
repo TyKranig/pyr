@@ -14,6 +14,7 @@ setup(
         ,"PyOpenSSL"
         ,"oauth2client"
         ,"lxml"
+        ,"pymongo"
     ],
     entry_points={
     },
