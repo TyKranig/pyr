@@ -6,7 +6,7 @@ from cdlapi import get_key
 class ApiCall:
     key = get_key()
 
-    def getLeague(self, **kwargs):
+    def getLeague(self, session, **kwargs):
         kwargs['key'] = self.key
         response = requests.get(endpoints.GETMATCHHISTORY, params=kwargs)
         return json.loads(response.text)

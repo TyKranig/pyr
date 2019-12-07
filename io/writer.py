@@ -97,11 +97,12 @@ minGame = MHeap()
 
 # IDs for seasons 1 2 and 3 respectively
 leagues = [10824,11086,11336]
+# games to skip that were broken
 gamesSkipped = [5036395844]
 
 dotaApi = ApiCall()
 for id in leagues:
-  resp = dotaApi.getLeague(league_id=id)
+  resp = dotaApi.getLeague(session, league_id=id)
   amt = len(resp['result']['matches'])
   print("{0} matches parsed...".format(amt))
   
