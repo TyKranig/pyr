@@ -1,22 +1,27 @@
 import requests
 import json
-from cdlapi import endpoints
-from cdlapi import get_key
+import os.path
+from endpoints import GETMATCHHISTORY, GETSINGLEMATCH, GETPLAYER
+
+def get_key():
+    with open(".env", "r") as file:
+        key = file.read().strip()
+    return key
 
 class ApiCall:
     key = get_key()
 
     def getLeague(self, session, **kwargs):
         kwargs['key'] = self.key
-        response = requests.get(endpoints.GETMATCHHISTORY, params=kwargs)
+        response = requests.get(GETMATCHHISTORY, params=kwargs)
         return json.loads(response.text)
 
     def getMatch(self, session, **kwargs):
         kwargs['key'] = self.key
-        response = session.get(endpoints.GETSINGLEMATCH, params=kwargs)
+        response = session.get(GETSINGLEMATCH, params=kwargs)
         return json.loads(response.text)
 
     def getPlayerSummary(self, session, **kwargs):
         kwargs['key'] = self.key
-        response = session.get(endpoints.GETPLAYER, params=kwargs)
+        response = session.get(GETPLAYER, params=kwargs)
         return json.loads(response.text)["response"]["players"][0]

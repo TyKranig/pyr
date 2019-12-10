@@ -20,7 +20,6 @@ setup(
     },
     zip_safe=False,
     include_package_data=True,
-    packages=find_packages(),
     package_data={
     },
     data_files=[
