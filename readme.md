@@ -65,3 +65,13 @@ Cron run logs can be found using the command grep "cron" /var/log/syslog.1
 Add the .1 because the script runs at midnight and the logs also get backed up then
 Next task is to get player names using the 32 bit player id, you need to 64 bit id to search
 https://dev.dota2.com/showthread.php?t=58317&highlight=teaminfo for getting this
+
+### 12/10/2019
+Added mongodb support, still not implemented fully but testing and querying is much faster then hitting an api
+The goal at the end, apart from speed, is to add more extensive records such as fasting game in season 3, or 
+most deaths on a player whose name starts with a, a database allows for that and I made the choice to use
+mongodb because of the ease of setup, I don't have to stand up tables, just manage collections of data, this works
+really well for the current system because I can narrow down the collections I need to
+games
+players
+The players collection may come in handy later
