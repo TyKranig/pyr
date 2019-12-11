@@ -8,7 +8,7 @@ import gspread
 import json
 import time
 from oauth2client.service_account import ServiceAccountCredentials
-from cdlapi.dotaApi import ApiCall
+from apicall import ApiCall
 from lxml.html import fromstring
 
 ##############################  UTILITIES  #####################
