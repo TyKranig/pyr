@@ -18,11 +18,11 @@ class ApiCall:
     def getLeague(self, **kwargs):
         kwargs['key'] = self.key
         response = self.requests.get(GETMATCHHISTORY, params=kwargs)
-        return json.loads(response.text)
+        return json.loads(response.text)['result']['matches']
 
     def getMatch(self, **kwargs):
         kwargs['key'] = self.key
-        response = self.session.get(GETSINGLEMATCH, params=kwargs)
+        response = self.session.get(GETSINGLEMATCH, params=kwargs)['result']
         return json.loads(response.text)
 
     def getPlayerSummary(self, **kwargs):

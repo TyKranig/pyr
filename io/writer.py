@@ -2,43 +2,32 @@
 import datetime
 import time
 from apicall import ApiCall
-
-##############################  UTILITIES  #####################
-def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = 'x'):
-    percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
-    filledLength = int(length * iteration // total)
-    bar = fill * filledLength + '-' * (length - filledLength)
-    print('\r%s |%s| %s%% %s' % (prefix, bar, percent, suffix), end = '\r')
-    # Print New Line on Complete
-    if iteration == total: 
-        print()
-
-################################  AUTH  #######################
+from sheetwriter import SheetWriter
+from dao import DataWriter
 
 # sheet = client.open("CDL-Record-Book").sheet1
 
-##############################  DATA COLLECT  #################
+# open two cnnection to the Mongo db
+gamesColl = DataWriter("games")
+performancesColl = DataWriter("performances")
 
-# IDs for seasons 1 2 and 3 respectively
-leagues = [10824,11086,11336]
-# games to skip that were broken
+# IDs for seasons 1, 2, and 3 respectively
+seasons = [(1, 10824), (2, 11086), (3, 11336)]
+
+# games to skip that were broken or cheated
 gamesSkipped = [5036395844]
 
 dotaApi = ApiCall()
-for id in leagues:
-  resp = dotaApi.getLeague(session, league_id=id)
-  amt = len(resp['result']['matches'])
-  print("{0} matches parsed...".format(amt))
+for season in seasons:
+  resp = dotaApi.getLeague(league_id=season[0])
+  print("{0} matches parsing...".format(len(resp)))
   
-  i = 0
-  for k in resp['result']['matches']:
-    i += 1
-    printProgressBar(i, amt)
+  for k in resp:
+    print("\r{0}".format(k), end = '')
     if k["match_id"] not in gamesSkipped:
-      game = dotaApi.getMatch(session, match_id=k["match_id"])["result"]  
+      game = dotaApi.getMatch(match_id=k["match_id"])
       tHeap.push(game["duration"], game)
       minGame.push((-1 * game["duration"]), game)
-
       for p in game["players"]:
         # where p is the json object for a player
         p["match_id"] = k["match_id"]
