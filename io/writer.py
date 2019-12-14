@@ -1,30 +1,10 @@
 #!/usr/bin/env python
-import os
-import json
-import heapq
 import datetime
-import requests
-import gspread
-import json
 import time
-from oauth2client.service_account import ServiceAccountCredentials
 from apicall import ApiCall
-from lxml.html import fromstring
 
 ##############################  UTILITIES  #####################
-
 def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = 'x'):
-    """
-    Call in a loop to create terminal progress bar
-    @params:
-        iteration   - Required  : current iteration (Int)
-        total       - Required  : total iterations (Int)
-        prefix      - Optional  : prefix string (Str)
-        suffix      - Optional  : suffix string (Str)
-        decimals    - Optional  : positive number of decimals in percent complete (Int)
-        length      - Optional  : character length of bar (Int)
-        fill        - Optional  : bar fill character (Str)
-    """
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filledLength = int(length * iteration // total)
     bar = fill * filledLength + '-' * (length - filledLength)
@@ -33,67 +13,11 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
     if iteration == total: 
         print()
 
-session = requests.Session()
-
-POINT = "point"
-PLAYER_NAME = "player-name"
-DOTABUFF_URL = "dotabuff-url"
-def getFormattedData(item, dataPoint):
-  ret = {}
-  ret[POINT] = item[dataPoint]
-  try:
-    sixtyfour = item["account_id"] + 76561197960265728
-    ret[PLAYER_NAME] = dotaApi.getPlayerSummary(session, steamids=sixtyfour)["personaname"]
-  except KeyError:
-    pass
-  ret[DOTABUFF_URL] = "https://www.dotabuff.com/matches/{0}".format(item["match_id"])
-  return ret
-
-############################### CLASSES #######################
-class DctObj(object):
-  def __init__(self, key, dct):
-    self.key = key
-    self.dct = dct
-
-  def __lt__(self, other):
-    return self.key > other.key
-
-  def __eq__(self, other):
-    return self.key == other.key
-
-  def __repr__(self):
-    return '{0.__class__.__name__}(key={0.key}, dct={0.dct})'.format(self)
-
-  def __str__(self):
-    return json.dumps(self.dct)
-
-class MHeap(object):
-  def __init__(self):
-    self._values = []
-
-  def push(self, key, item):
-    heapq.heappush(self._values, DctObj(key, item))
-  
-  def pop(self):
-    return heapq.heappop(self._values).dct
-
 ################################  AUTH  #######################
-scope = ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/spreadsheets']
 
-jsonCreds = os.path.join(os.path.dirname(__file__), "CDL-Sheet-18007c70b37d.json")
-credentials = ServiceAccountCredentials.from_json_keyfile_name(jsonCreds, scope)
-client = gspread.authorize(credentials)
-
-sheet = client.open("CDL-Record-Book").sheet1
+# sheet = client.open("CDL-Record-Book").sheet1
 
 ##############################  DATA COLLECT  #################
-
-kHeap = MHeap()
-tHeap = MHeap()
-dHeap = MHeap()
-aHeap = MHeap()
-gHeap = MHeap()
-minGame = MHeap()
 
 # IDs for seasons 1 2 and 3 respectively
 leagues = [10824,11086,11336]
