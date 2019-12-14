@@ -10,14 +10,17 @@ class DataWriter():
     self.db = self.client["database"]
     self.collection = self.db[box]
 
-  def clearData(self, box):
+  def clearData(self):
     x = self.collection.delete_many({})
     return x.deleted_count
 
-  def writeData(self, box, data):
+  def writeMany(self, data):
     self.collection.insert_many(data)
   
-  def getData(self, box, field, amt, sort):
+  def writeOne(self, data):
+    self.collection.insert_one(data)
+  
+  def getData(self, field, amt, sort):
     return self.collection.find().sort(field, sort).limit(amt)
 
 # for game in collection.find().sort("duration", -1).limit(10):
