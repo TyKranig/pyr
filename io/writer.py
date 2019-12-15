@@ -5,42 +5,59 @@ from apicall import ApiCall
 from sheetwriter import SheetWriter
 from dao import DataWriter
 
-# sheet = client.open("CDL-Record-Book").sheet1
-
 # open two cnnection to the Mongo db
 gamesColl = DataWriter("games")
 performancesColl = DataWriter("performances")
 
-gamesColl.clearData()
-performancesColl.clearData()
+def callApi():
+  gamesColl.clearData()
+  performancesColl.clearData()
+  # IDs for seasons 1, 2, and 3 respectively as (season number, season id)
+  seasons = [(1, 10824)]#, (2, 11086), (3, 11336)]
+  # games to skip that were broken or cheated
+  gamesSkipped = [5036395844]
+  dotaApi = ApiCall()
+  for season in seasons:
+    resp = dotaApi.getLeague(league_id=season[1])
+    print("{0} matches parsing...".format(len(resp)))
+    for index, k in enumerate(resp):
+      print("\r{0}".format(index), end = '')
+      if(index > 10):
+        break
+      if k["match_id"] not in gamesSkipped:
+        match = dotaApi.getMatch(match_id=k["match_id"])
+        match["string_duration"] = str(datetime.timedelta(seconds=match["duration"]))
+        match["dotabuff"] = "https://www.dotabuff.com/matches/{0}".format(k["match_id"])
+        gamesColl.writeOne(match)
+        for performance in match["players"]:
+          # Steam api only lets you look up players with a 64bit account id, the one stored in dota is 32bit
+          sixtyfour = performance["account_id"] + 76561197960265728
+          performance["match_id"] = k["match_id"]
+          performance["player_name"] = dotaApi.getPlayerSummary(steamids=sixtyfour)["personaname"]
+          performance["dotabuff"] = "https://www.dotabuff.com/matches/{0}".format(k["match_id"])
+          performancesColl.writeOne(performance)
 
-# IDs for seasons 1, 2, and 3 respectively as (season number, season id)
-seasons = [(1, 10824), (2, 11086), (3, 11336)]
+writer = SheetWriter("test")
 
-# games to skip that were broken or cheated
-gamesSkipped = [5036395844]
+topKills = performancesColl.getData("kills", 10, -1)
+writer.writeArray(1,1, topKills, "kills", "player_name", "dotabuff")
 
-dotaApi = ApiCall()
-for season in seasons:
-  resp = dotaApi.getLeague(league_id=season[0])
-  print("{0} matches parsing...".format(len(resp)))
-  
-  for k in resp:
-    print("\r{0}".format(k), end = '')
-    if k["match_id"] not in gamesSkipped:
-      match = dotaApi.getMatch(match_id=k["match_id"])
-      gamesColl.writeOne(match)
-      for player in match["players"]:
-        # Steam api only lets you look up players with a 64bit account id, the one stored in dota is 32bit
-        sixtyfour = player["account_id"] + 76561197960265728
-        player["match_id"] = k["match_id"]
-        player["player_name"] = dotaApi.getPlayerSummary(steamids=sixtyfour)["personaname"]
-        performancesColl.writeOne(player)
+topDeaths = performancesColl.getData("deaths", 10, -1)
+writer.writeArray(12,1, topDeaths, "deaths", "player_name", "dotabuff")
 
-######################################## OUTPUT DATA TO SHEET ####################################
+topAssists = performancesColl.getData("assists", 10, -1)
+writer.writeArray(23,1, topAssists, "assists", "player_name", "dotabuff")
+
+topGPM = performancesColl.getData("gold_per_min", 10, -1)
+writer.writeArray(34,1, topGPM, "gold_per_min", "player_name", "dotabuff")
+
+longDuration = gamesColl.getData("duration", 5, -1)
+writer.writeArray(45,1, longDuration, "string_duration", "dotabuff")
+
+shortDuration = gamesColl.getData("duration", 5, 1)
+writer.writeArray(51,1, shortDuration, "string_duration", "dotabuff")
 
 # print("updating kills")
-# row = 2
 # for i in range(6):
 #     item = kHeap.pop()
 #     data = getFormattedData(item, "kills")
