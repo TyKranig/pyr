@@ -1,6 +1,7 @@
 import requests
 import json
 import os.path
+import datetime
 
 GETMATCHHISTORY = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?'
 GETSINGLEMATCH = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V001/?'
@@ -24,9 +25,16 @@ class ApiCall:
   def getMatch(self, **kwargs):
     kwargs['key'] = self.key
     response = self.session.get(GETSINGLEMATCH, params=kwargs)
-    return json.loads(response.text)['result']
+    match = json.loads(response.text)['result']
+    match["string_duration"] = str(datetime.timedelta(seconds=match["duration"]))
+    match["dotabuff"] = "https://www.dotabuff.com/matches/{0}".format(kwargs["match_id"])
+    return match
 
-  def getPlayerSummary(self, **kwargs):
-    kwargs['key'] = self.key
-    response = self.session.get(GETPLAYER, params=kwargs)
-    return json.loads(response.text)["response"]["players"][0]
+  def getPlayerSummary(self, performance, match_id):
+    # Steam api only lets you look up players with a 64bit account id, the one stored in dota is 32bit
+    sixtyfour = performance["account_id"] + 76561197960265728
+    response = self.session.get(GETPLAYER, key=self.key, steamids=sixtyfour)["personaname"]
+    performance["player_name"] = json.loads(response.text)["response"]["players"][0]["personaname"]
+    performance["dotabuff"] = "https://www.dotabuff.com/matches/{0}".format(match_id)
+    performance["match_id"] = match_id
+    return performance
