@@ -1,3 +1,28 @@
+Pyr is a Python based script that queries valves API for dota matches in order to obtain match data.
+Match data is then inserted into a mongo database hosted on my server.
+The script then extracts various records from matches such as,
+  Longest match
+  Shortest match
+  Most Kills in a match
+  Most Deaths in a match
+  etc.
+These records are then uploaded to a google spreadsheet using the gspread library.
+
+Spreadsheet Upload: sheetwriter.py
+Api Calls: apicall.py
+Mongo Interface: dao.py
+Script to call: writer.py
+
+Running this on another machine won't work unless you have a mongo database setup.
+After setting up the mongo database you need to set the correct IP for said database in dao.py
+Two files also nescassary are .env and a json key for the google sheets api.
+Steam api key: https://steamcommunity.com/dev/apikey
+Dashboard for google sheets api: https://console.cloud.google.com/apis/dashboard
+
+Put both of those in the io folder in order for the script to run properly
+
+Below is a series of notes I wrote during the development to keep track of where I am at
+
 To build the cdlapi package just run the command
 ```
 python setup.py develop
