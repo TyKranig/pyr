@@ -16,7 +16,8 @@ class ApiCall:
   def __init__(self):
     self.key = get_key()
     self.session = requests.session()
-
+  # TODO potentially use an object instead to store matches in order to get repsonse cleaner
+  # Match object would store matches to skip, leagues, and match ids to add
   def getLeague(self, **kwargs):
     kwargs['key'] = self.key
     response = self.session.get(GETMATCHHISTORY, params=kwargs)
@@ -38,3 +39,10 @@ class ApiCall:
     performance["dotabuff"] = "https://www.dotabuff.com/matches/{0}".format(match_id)
     performance["match_id"] = match_id
     return performance
+
+  def getMatchJson(self, **kwargs):
+    match = self.getMatch(kwargs)
+    players = []
+    for player in match["players"]:
+      players.append(self.getPlayerSummary(player, match["match_id"]))
+    return (match, players)

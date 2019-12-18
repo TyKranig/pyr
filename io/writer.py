@@ -18,8 +18,8 @@ BROKEGAMES = [5036395844]
 def callApi():
   gamesColl.clearData()
   performancesColl.clearData()
+  
   dotaApi = ApiCall()
-  # TODO Return a tuple from get match that is (match json, [player json, player json, ...])
   for season in SEASONS:
     resp = dotaApi.getLeague(league_id=season[1])
     print("{0} matches parsing...".format(len(resp)))
@@ -27,10 +27,10 @@ def callApi():
       print("\r{0}".format(index), end = '')
       matchId = k['match_id']
       if matchId not in BROKEGAMES:
-        match = dotaApi.getMatch(match_id=matchId)
-        gamesColl.writeOne(match)
-        for performance in match["players"]:
-          performancesColl.writeOne(dotaApi.getPlayerSummary(performance, matchId))
+        match = dotaApi.getMatchJson(match_id=matchId)
+        gamesColl.writeOne(match[0])
+        for performance in match[1]:
+          performancesColl.writeOne(performance)
 
 writer = SheetWriter("test")
 

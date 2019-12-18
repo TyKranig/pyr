@@ -75,3 +75,11 @@ really well for the current system because I can narrow down the collections I n
 games
 players
 The players collection may come in handy later
+
+### 12/17/2019
+The next big change is going to be converting from getting every single match every time the script runs to just grabbing the last few matches
+MongoDB does support insert or update so that shouldn't be too big of an issue my only worry is run time
+Run time should be fine because we can index using match ids but in another project I ran into run time issues when indexing by string
+Few new classes that I need to add are
+Match.py
+new method to io.py that updates matches in the database
