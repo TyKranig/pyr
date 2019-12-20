@@ -1,8 +1,16 @@
 from apicall import ApiCall
 import json
 
+DOTABUFFURL = "https://www.dotabuff.com/matches/%d"
 BROKEGAMES = [5036395844]
 dotaApi = ApiCall()
+
+class CDL():
+  seasons = []
+
+  def __init__(self, leagueIds):
+    for league in leagueIds:
+      self.seasons.append(Season(leagueIds[1]))
 
 class Season():
   matches = []
@@ -13,12 +21,12 @@ class Season():
     for index, match in enumerate(resp):
       if match not in BROKEGAMES:
         print('\r%d' % (index), end = '')
-        self.matches.append(Match(match))
+        self.matches.append(Match(match['match_id']))
 
 class Match():
 
-  def __init__(self, match):
-    self.matchId = match["match_id"]
+  def __init__(self, matchId):
+    self.matchId = matchId
     match = dotaApi.getMatch(match_id=self.matchId)
     for point in match:
       self.__setattr__(point, match[point])
@@ -29,8 +37,9 @@ class Match():
   def formatPerformances(self):
     performances = []
     for perf in self.players:
-      perf["dotabuff"] = "https://www.dotabuff.com/matches/%d" % (self.matchId)
+      perf["dotabuff"] = DOTABUFFURL % (self.matchId)
       perf["match_id"] = self.matchId
+      performances.append(perf)
     return performances
 
 if __name__ == "__main__":

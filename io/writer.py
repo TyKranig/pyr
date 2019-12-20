@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 import datetime
 import time
-from apicall import ApiCall
 from sheetwriter import SheetWriter
 from dao import DataWriter
+from dataObjects import Season, Match, CDL
 
 SEASONS = [(1, 10824), (2, 11086), (3, 11336)]
 
@@ -11,22 +11,16 @@ SEASONS = [(1, 10824), (2, 11086), (3, 11336)]
 gamesColl = DataWriter("games")
 performancesColl = DataWriter("performances")
 
-def callApi():
+def buildDatabaseClean():
   gamesColl.clearData()
   performancesColl.clearData()
-  
-  dotaApi = ApiCall()
-  for season in SEASONS:
-    resp = dotaApi.getLeague(league_id=season[1])
-    print("{0} matches parsing...".format(len(resp)))
-    for index, k in enumerate(resp):
-      print("\r{0}".format(index), end = '')
-      matchId = k['match_id']
-      if matchId not in BROKEGAMES:
-        match = dotaApi.getMatchJson(match_id=matchId)
-        gamesColl.writeOne(match[0])
-        for performance in match[1]:
-          performancesColl.writeOne(performance)
+
+  cdl = CDL(SEASONS)
+
+  for season in cdl.seasons:
+    gamesColl.writeMany(season.matches)
+    performancesColl.writeMany(season.formatPerformances())
+
 
 writer = SheetWriter("test")
 
