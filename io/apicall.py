@@ -31,7 +31,7 @@ class ApiCall:
     match["dotabuff"] = "https://www.dotabuff.com/matches/{0}".format(kwargs["match_id"])
     return match
 
-  def getPlayerSummary(self, performance, match_id):
+  def getPlayerName(self, performance, match_id):
     # Steam api only lets you look up players with a 64bit account id, the one stored in dota is 32bit
     sixtyfour = performance["account_id"] + 76561197960265728
     response = self.session.get(GETPLAYER, key=self.key, steamids=sixtyfour)["personaname"]
@@ -44,5 +44,5 @@ class ApiCall:
     match = self.getMatch(kwargs)
     players = []
     for player in match["players"]:
-      players.append(self.getPlayerSummary(player, match["match_id"]))
+      players.append(self.getPlayerName(player, match["match_id"]))
     return (match, players)
