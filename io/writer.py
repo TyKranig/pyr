@@ -5,15 +5,11 @@ from apicall import ApiCall
 from sheetwriter import SheetWriter
 from dao import DataWriter
 
+SEASONS = [(1, 10824), (2, 11086), (3, 11336)]
+
 # open two cnnection to the Mongo db
 gamesColl = DataWriter("games")
 performancesColl = DataWriter("performances")
-
-
-# IDs for seasons 1, 2, and 3 respectively as (season number, season id)
-SEASONS = [(1, 10824), (2, 11086), (3, 11336)]
-# games to skip that were broken or cheated
-BROKEGAMES = [5036395844]
 
 def callApi():
   gamesColl.clearData()

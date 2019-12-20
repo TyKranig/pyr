@@ -16,8 +16,7 @@ class ApiCall:
   def __init__(self):
     self.key = get_key()
     self.session = requests.session()
-  # TODO potentially use an object instead to store matches in order to get repsonse cleaner
-  # Match object would store matches to skip, leagues, and match ids to add
+
   def getLeague(self, **kwargs):
     kwargs['key'] = self.key
     response = self.session.get(GETMATCHHISTORY, params=kwargs)
@@ -31,18 +30,7 @@ class ApiCall:
     match["dotabuff"] = "https://www.dotabuff.com/matches/{0}".format(kwargs["match_id"])
     return match
 
-  def getPlayerName(self, performance, match_id):
-    # Steam api only lets you look up players with a 64bit account id, the one stored in dota is 32bit
-    sixtyfour = performance["account_id"] + 76561197960265728
-    response = self.session.get(GETPLAYER, key=self.key, steamids=sixtyfour)["personaname"]
-    performance["player_name"] = json.loads(response.text)["response"]["players"][0]["personaname"]
-    performance["dotabuff"] = "https://www.dotabuff.com/matches/{0}".format(match_id)
-    performance["match_id"] = match_id
-    return performance
-
-  def getMatchJson(self, **kwargs):
-    match = self.getMatch(kwargs)
-    players = []
-    for player in match["players"]:
-      players.append(self.getPlayerName(player, match["match_id"]))
-    return (match, players)
+  def getPlayerName(self, **kwargs):
+    kwargs['key'] = self.key
+    response = self.session.get(GETPLAYER, params=kwargs)
+    return json.loads(response.text)['response']['players'][0]['personaname']
