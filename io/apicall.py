@@ -1,6 +1,7 @@
 import requests
 import json
 import os.path
+import os
 import datetime
 
 GETMATCHHISTORY = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?'
@@ -8,7 +9,7 @@ GETSINGLEMATCH = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V
 GETPLAYER = 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?'
 
 def get_key():
-    with open("io\.env", "r") as file:
+    with open(os.getcwd() + r"io\.env", "r") as file:
         key = file.read().strip()
     return key
 

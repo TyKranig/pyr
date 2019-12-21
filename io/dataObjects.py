@@ -5,13 +5,17 @@ DOTABUFFURL = "https://www.dotabuff.com/matches/%d"
 BROKEGAMES = [5036395844]
 dotaApi = ApiCall()
 
+
+# build an object for storing all of CDL
 class CDL():
   seasons = []
 
   def __init__(self, leagueIds):
     for league in leagueIds:
-      self.seasons.append(Season(leagueIds[1]))
+      self.seasons.append(Season(league[1]))
 
+
+# build an object for storing a single season
 class Season():
   matches = []
 
@@ -23,9 +27,12 @@ class Season():
         print('\r%d' % (index), end = '')
         self.matches.append(Match(match['match_id']))
 
+
+# build an object for storing a single match
 class Match():
 
   def __init__(self, matchId):
+    self.players = []
     self.matchId = matchId
     match = dotaApi.getMatch(match_id=self.matchId)
     for point in match:
@@ -42,5 +49,7 @@ class Match():
       performances.append(perf)
     return performances
 
+
+# for testing purposes
 if __name__ == "__main__":
   season = Season(10824)

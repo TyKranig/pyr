@@ -1,0 +1,6 @@
+requests
+gspread
+PyOpenSSL
+oauth2client
+lxml
+pymongo
