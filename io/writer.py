@@ -12,15 +12,15 @@ gamesColl = DataWriter("games")
 performancesColl = DataWriter("performances")
 
 def buildDatabaseClean():
+  print("clearing data")
   gamesColl.clearData()
   performancesColl.clearData()
-
   cdl = CDL(SEASONS)
-
   for season in cdl.seasons:
     gamesColl.writeMany(season.matches)
     performancesColl.writeMany(season.formatPerformances())
 
+buildDatabaseClean()
 
 writer = SheetWriter("test")
 

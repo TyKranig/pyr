@@ -27,6 +27,12 @@ class Season():
         print('\r%d' % (index), end = '')
         self.matches.append(Match(match['match_id']))
 
+  def formatMatches(self):
+    formattedMatches = []
+    for match in self.matches:
+      formattedMatches.append(match.__dict__)
+    return formattedMatches
+
 
 # build an object for storing a single match
 class Match():
