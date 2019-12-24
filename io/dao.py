@@ -20,7 +20,7 @@ class DataWriter():
   def writeOne(self, data):
     self.collection.insert_one(data)
   
-  def getData(self, field, amt, sort):
+  def getData(self, field, amt, sort, filter):
     return self.collection.find({},{"_id":0}).sort(field, sort).limit(amt)
 
 # for game in collection.find().sort("duration", -1).limit(10):

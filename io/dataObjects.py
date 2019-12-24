@@ -12,19 +12,20 @@ class CDL():
 
   def __init__(self, leagueIds):
     for league in leagueIds:
-      self.seasons.append(Season(league[1]))
+      self.seasons.append(Season(league[1], league[0]))
 
 
 # build an object for storing a single season
 class Season():
   matches = []
 
-  def __init__(self, seasonId):
+  def __init__(self, seasonId, seasonNumber):
     resp = dotaApi.getLeague(league_id=seasonId)
     print("{0} matches parsing...".format(len(resp)))
     for index, match in enumerate(resp):
       if match not in BROKEGAMES:
         print('\r%d' % (index), end = '')
+        match["seasonNumber"] = seasonNumber
         self.matches.append(Match(match['match_id']))
 
   def formatMatches(self):
@@ -58,4 +59,4 @@ class Match():
 
 # for testing purposes
 if __name__ == "__main__":
-  season = Season(10824)
+  season = Season(10824, 1)
