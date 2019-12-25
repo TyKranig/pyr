@@ -1,0 +1,9 @@
+[] - Seasonal based records
+    - Already inserting the season into the database
+[] - only grab the most recent games
+    - speed up run times
+[] - Captain based records
+    - need to grab captains from seasonal draft sheets, manual process
+[] - combine writes into one big write to avoid long runtimes
+    - Google only allows 100 writes per 100 seconds, currently the script is at 500 writes total
+    - leads to super long run times waiting for the write limit to reset
