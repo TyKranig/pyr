@@ -17,7 +17,7 @@ def buildDatabaseClean():
   performancesColl.clearData()
   cdl = CDL(SEASONS)
   for season in cdl.seasons:
-    gamesColl.writeMany(season.matches)
+    gamesColl.writeMany(season.formatMatches())
     performancesColl.writeMany(season.formatPerformances())
 
 buildDatabaseClean()

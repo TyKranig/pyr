@@ -4,11 +4,10 @@ import json
 DOTABUFFURL = "https://www.dotabuff.com/matches/%d"
 BROKEGAMES = [5036395844]
 dotaApi = ApiCall()
-
+DEBUG = True
 
 # build an object for storing all of CDL
 class CDL():
-  seasons = []
 
   def __init__(self, leagueIds):
     for league in leagueIds:
@@ -17,27 +16,35 @@ class CDL():
 
 # build an object for storing a single season
 class Season():
-  matches = []
 
   def __init__(self, seasonId, seasonNumber):
+    self.seasonId = seasonId
+    self.seasonNumber = seasonNumber
     resp = dotaApi.getLeague(league_id=seasonId)
     print("{0} matches parsing...".format(len(resp)))
     for index, match in enumerate(resp):
+      if DEBUG and index > 3:
+        break
       if match not in BROKEGAMES:
         print('\r%d' % (index), end = '')
         match["seasonNumber"] = seasonNumber
         self.matches.append(Match(match['match_id']))
 
+  # format the matches for insertion
   def formatMatches(self):
     formattedMatches = []
     for match in self.matches:
       formattedMatches.append(match.__dict__)
     return formattedMatches
 
+  def formatPerformances(self):
+    perf = []
+    for match in self.matches:
+      perf = perf + match.formatPerformances()
+    return perf
 
 # build an object for storing a single match
 class Match():
-
   def __init__(self, matchId):
     self.players = []
     self.matchId = matchId
