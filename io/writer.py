@@ -22,7 +22,7 @@ def buildDatabaseClean():
 
 buildDatabaseClean()
 
-# get seasonal records
+# write seasonal records
 for season in SEASONS:
   writer = SheetWriter(season[2])
 

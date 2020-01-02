@@ -3,6 +3,7 @@ import json
 import os.path
 import os
 import datetime
+from collections import namedtuple
 
 GETMATCHHISTORY = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?'
 GETSINGLEMATCH = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V001/?'
@@ -35,3 +36,9 @@ class ApiCall:
     kwargs['key'] = self.key
     response = self.session.get(GETPLAYER, params=kwargs)
     return json.loads(response.text)['response']['players'][0]['personaname']
+
+  def  _json_object_hook(d):
+    return namedtuple('X', d.keys())(*d.values())
+  
+  def json2obj(data): 
+    return json.loads(data, object_hook=_json_object_hook)
