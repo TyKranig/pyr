@@ -10,6 +10,7 @@ DEBUG = True
 class CDL():
 
   def __init__(self, leagueIds):
+    self.seasons = []
     for league in leagueIds:
       self.seasons.append(Season(league[1], league[0]))
 
@@ -18,6 +19,7 @@ class CDL():
 class Season():
 
   def __init__(self, seasonId, seasonNumber):
+    self.matches = []
     self.seasonId = seasonId
     self.seasonNumber = seasonNumber
     resp = dotaApi.getLeague(league_id=seasonId)

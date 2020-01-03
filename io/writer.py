@@ -27,19 +27,19 @@ for season in SEASONS:
   writer = SheetWriter(season[2])
 
   topKills = performancesColl.getData("kills", 10, -1, {"seasonNumber": season[0]})
-  writer.writeArray(1, 1, topKills, "kills", "player_name", "dotabuff")
+  writer.writeArray(1, 1, topKills, "kills", "steamName", "dotabuff")
 
   time.sleep(30)
   topDeaths = performancesColl.getData("deaths", 10, -1, {"seasonNumber": season[0]})
-  writer.writeArray(12, 1, topDeaths, "deaths", "player_name", "dotabuff")
+  writer.writeArray(12, 1, topDeaths, "deaths", "steamName", "dotabuff")
 
   time.sleep(30)
   topAssists = performancesColl.getData("assists", 10, -1, {"seasonNumber": season[0]})
-  writer.writeArray(23, 1, topAssists, "assists", "player_name", "dotabuff")
+  writer.writeArray(23, 1, topAssists, "assists", "steamName", "dotabuff")
 
   time.sleep(30)
   topGPM = performancesColl.getData("gold_per_min", 10, -1, {"seasonNumber": season[0]})
-  writer.writeArray(34, 1, topGPM, "gold_per_min", "player_name", "dotabuff")
+  writer.writeArray(34, 1, topGPM, "gold_per_min", "steamName", "dotabuff")
 
   time.sleep(30)
   longDuration = gamesColl.getData("duration", 5, -1, {"seasonNumber": season[0]})
@@ -53,19 +53,19 @@ for season in SEASONS:
   writer = SheetWriter("AllTime")
 
   topKills = performancesColl.getData("kills", 10, -1, {"seasonNumber": season[0]})
-  writer.writeArray(1, 1, topKills, "kills", "player_name", "dotabuff")
+  writer.writeArray(1, 1, topKills, "kills", "steamName", "dotabuff")
 
   time.sleep(30)
   topDeaths = performancesColl.getData("deaths", 10, -1, {"seasonNumber": season[0]})
-  writer.writeArray(12, 1, topDeaths, "deaths", "player_name", "dotabuff")
+  writer.writeArray(12, 1, topDeaths, "deaths", "steamName", "dotabuff")
 
   time.sleep(30)
   topAssists = performancesColl.getData("assists", 10, -1, {"seasonNumber": season[0]})
-  writer.writeArray(23, 1, topAssists, "assists", "player_name", "dotabuff")
+  writer.writeArray(23, 1, topAssists, "assists", "steamName", "dotabuff")
 
   time.sleep(30)
   topGPM = performancesColl.getData("gold_per_min", 10, -1, {"seasonNumber": season[0]})
-  writer.writeArray(34, 1, topGPM, "gold_per_min", "player_name", "dotabuff")
+  writer.writeArray(34, 1, topGPM, "gold_per_min", "steamName", "dotabuff")
 
   time.sleep(30)
   longDuration = gamesColl.getData("duration", 5, -1, {"seasonNumber": season[0]})
