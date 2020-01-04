@@ -5,7 +5,7 @@ from sheetwriter import SheetWriter
 from dao import DataWriter
 from dataObjects import Season, Match, CDL
 
-SEASONS = [(1, 10824, "Season1"), (2, 11086, "Season2"), (3, 11336, "Season3")]
+SEASONS = [(1, 10824, "Season1"), (2, 11086, "Season2"), (3, 11336, "Season3"), (4, 11560, "Season4")]
 
 # open two cnnection to the Mongo db
 gamesColl = DataWriter("games")
@@ -22,55 +22,43 @@ def buildDatabaseClean():
 
 buildDatabaseClean()
 
-# write seasonal records
 for season in SEASONS:
   writer = SheetWriter(season[2])
 
   topKills = performancesColl.getData("kills", 10, -1, {"seasonNumber": season[0]})
-  writer.writeArray(2, 1, topKills, "kills", "steamName", "dotabuff")
+  writer.writeArray("A2:C11", topKills, "kills", "steamName", "dotabuff")
 
-  time.sleep(30)
   topDeaths = performancesColl.getData("deaths", 10, -1, {"seasonNumber": season[0]})
-  writer.writeArray(13, 1, topDeaths, "deaths", "steamName", "dotabuff")
+  writer.writeArray("A13:C22", topDeaths, "deaths", "steamName", "dotabuff")
 
-  time.sleep(30)
   topAssists = performancesColl.getData("assists", 10, -1, {"seasonNumber": season[0]})
-  writer.writeArray(24, 1, topAssists, "assists", "steamName", "dotabuff")
+  writer.writeArray("A24:C33", topAssists, "assists", "steamName", "dotabuff")
 
-  time.sleep(30)
   topGPM = performancesColl.getData("gold_per_min", 10, -1, {"seasonNumber": season[0]})
-  writer.writeArray(35, 1, topGPM, "gold_per_min", "steamName", "dotabuff")
+  writer.writeArray("A35:C44", topGPM, "gold_per_min", "steamName", "dotabuff")
 
-  time.sleep(30)
-  longDuration = gamesColl.getData("duration", 5, -1, {"seasonNumber": season[0]})
-  writer.writeArray(46, 1, longDuration, "string_duration", "dotabuff")
+  longDuration = gamesColl.getData("duration", 10, -1, {"seasonNumber": season[0]})
+  writer.writeArray("A46:B55", longDuration, "string_duration", "dotabuff")
 
-  time.sleep(30)
-  shortDuration = gamesColl.getData("duration", 5, 1, {"seasonNumber": season[0]})
-  writer.writeArray(52, 1, shortDuration, "string_duration", "dotabuff")
+  shortDuration = gamesColl.getData("duration", 10, 1, {"seasonNumber": season[0]})
+  writer.writeArray("A57:B66", shortDuration, "string_duration", "dotabuff")
 
+writer = SheetWriter("AllTime")
 
-  writer = SheetWriter("AllTime")
+topKills = performancesColl.getData("kills", 10, -1, {})
+writer.writeArray("A2:C11", topKills, "kills", "steamName", "dotabuff")
 
-  topKills = performancesColl.getData("kills", 10, -1, {"seasonNumber": season[0]})
-  writer.writeArray(2, 1, topKills, "kills", "steamName", "dotabuff")
+topDeaths = performancesColl.getData("deaths", 10, -1, {})
+writer.writeArray("A13:C22", topDeaths, "deaths", "steamName", "dotabuff")
 
-  time.sleep(30)
-  topDeaths = performancesColl.getData("deaths", 10, -1, {"seasonNumber": season[0]})
-  writer.writeArray(13, 1, topDeaths, "deaths", "steamName", "dotabuff")
+topAssists = performancesColl.getData("assists", 10, -1, {})
+writer.writeArray("A24:C33", topAssists, "assists", "steamName", "dotabuff")
 
-  time.sleep(30)
-  topAssists = performancesColl.getData("assists", 10, -1, {"seasonNumber": season[0]})
-  writer.writeArray(24, 1, topAssists, "assists", "steamName", "dotabuff")
+topGPM = performancesColl.getData("gold_per_min", 10, -1, {})
+writer.writeArray("A35:C44", topGPM, "gold_per_min", "steamName", "dotabuff")
 
-  time.sleep(30)
-  topGPM = performancesColl.getData("gold_per_min", 10, -1, {"seasonNumber": season[0]})
-  writer.writeArray(35, 1, topGPM, "gold_per_min", "steamName", "dotabuff")
+longDuration = gamesColl.getData("duration", 10, -1, {})
+writer.writeArray("A46:B55", longDuration, "string_duration", "dotabuff")
 
-  time.sleep(30)
-  longDuration = gamesColl.getData("duration", 5, -1, {"seasonNumber": season[0]})
-  writer.writeArray(46, 1, longDuration, "string_duration", "dotabuff")
-
-  time.sleep(30)
-  shortDuration = gamesColl.getData("duration", 5, 1, {"seasonNumber": season[0]})
-  writer.writeArray(52, 1, shortDuration, "string_duration", "dotabuff")
+shortDuration = gamesColl.getData("duration", 10, 1, {})
+writer.writeArray("A57:B66", shortDuration, "string_duration", "dotabuff")

@@ -22,9 +22,3 @@ class DataWriter():
   
   def getData(self, field, amt, sort, filter):
     return self.collection.find({},{"_id":0}).sort(field, sort).limit(amt)
-
-# for game in collection.find().sort("duration", -1).limit(10):
-#   print(datetime.timedelta(seconds=game["duration"]), game["match_id"])
-
-# for game in collection.find().sort("duration", 1).limit(10):
-#   print(datetime.timedelta(seconds=game["duration"]), game["match_id"])

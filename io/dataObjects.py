@@ -4,7 +4,7 @@ import json
 DOTABUFFURL = "https://www.dotabuff.com/matches/%d"
 BROKEGAMES = [5036395844]
 dotaApi = ApiCall()
-DEBUG = True
+DEBUG = False
 
 # build an object for storing all of CDL
 class CDL():
@@ -27,7 +27,7 @@ class Season():
     for index, match in enumerate(resp):
       if DEBUG and index > 3:
         break
-      if match not in BROKEGAMES:
+      if match['match_id'] not in BROKEGAMES:
         print('\r%d' % (index), end = '')
         match["seasonNumber"] = seasonNumber
         self.matches.append(Match(match['match_id']))

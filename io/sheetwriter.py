@@ -12,7 +12,10 @@ class SheetWriter():
     self.client = gspread.authorize(self.credentials)
     self.sheet = self.client.open("CDL-Record-Book").worksheet(sheet)
 
-  def writeArray(self, x, y, data, *args):
+  def writeArray(self, range, data, *args):
+    cells = self.sheet.range(range)
+    multi = len(args)
     for rank, value in enumerate(data):
       for index, field in enumerate(args):
-        self.sheet.update_cell(x + rank, y + index, value[field])
+        cells[rank * multi + index].value = value[field]
+    self.sheet.update_cells(cells)
