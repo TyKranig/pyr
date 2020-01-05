@@ -6,7 +6,7 @@ def clearCol(col):
 
 class DataWriter():
   def __init__(self, box):
-    self.client = pymongo.MongoClient("mongodb://192.168.1.2:27017/")
+    self.client = pymongo.MongoClient("mongodb://192.168.1.6:27017/")
     self.db = self.client["database"]
     self.collection = self.db[box]
 
@@ -21,4 +21,7 @@ class DataWriter():
     self.collection.insert_one(data)
   
   def getData(self, field, amt, sort, filter):
-    return self.collection.find({},{"_id":0}).sort(field, sort).limit(amt)
+    return self.collection.find(filter,{"_id":0}).sort(field, sort).limit(amt)
+
+  def lookForMatch(self, matchId):
+    return self.collection.find({"match_id": matchId})

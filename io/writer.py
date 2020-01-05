@@ -11,16 +11,18 @@ SEASONS = [(1, 10824, "Season1"), (2, 11086, "Season2"), (3, 11336, "Season3"), 
 gamesColl = DataWriter("games")
 performancesColl = DataWriter("performances")
 
-def buildDatabaseClean():
-  print("clearing data")
-  gamesColl.clearData()
-  performancesColl.clearData()
+# flag whether or not to clean the database entirely
+def buildDatabaseClean(flag):
+  if flag:
+    print("clearing data")
+    gamesColl.clearData()
+    performancesColl.clearData()
   cdl = CDL(SEASONS)
   for season in cdl.seasons:
     gamesColl.writeMany(season.formatMatches())
     performancesColl.writeMany(season.formatPerformances())
 
-buildDatabaseClean()
+buildDatabaseClean(True)
 
 for season in SEASONS:
   writer = SheetWriter(season[2])

@@ -1,10 +1,10 @@
 from apicall import ApiCall
 import json
+from dao import DataWriter 
 
 DOTABUFFURL = "https://www.dotabuff.com/matches/%d"
 BROKEGAMES = [5036395844]
 dotaApi = ApiCall()
-DEBUG = False
 
 # build an object for storing all of CDL
 class CDL():
@@ -25,12 +25,17 @@ class Season():
     resp = dotaApi.getLeague(league_id=seasonId)
     print("{0} matches parsing...".format(len(resp)))
     for index, match in enumerate(resp):
-      if DEBUG and index > 3:
-        break
-      if match['match_id'] not in BROKEGAMES:
+      matchId = match['match_id']
+      if matchId not in BROKEGAMES and self.checkForMatch(matchId):
         print('\r%d' % (index), end = '')
         match["seasonNumber"] = seasonNumber
-        self.matches.append(Match(match['match_id']))
+        self.matches.append(Match(match))
+
+  def checkForMatch(self, matchId):
+    gamesColl = DataWriter("games")
+    if gamesColl.lookForMatch(matchId).count() > 0:
+      return False
+    return True
 
   # format the matches for insertion
   def formatMatches(self):
@@ -49,8 +54,9 @@ class Season():
 class Match():
   def __init__(self, matchId):
     self.players = []
-    self.matchId = matchId
+    self.matchId = matchId['match_id']
     match = dotaApi.getMatch(match_id=self.matchId)
+    self.seasonNumber = matchId["seasonNumber"]
     for point in match:
       self.__setattr__(point, match[point])
     for player in self.players:
@@ -62,6 +68,7 @@ class Match():
     for perf in self.players:
       perf["dotabuff"] = DOTABUFFURL % (self.matchId)
       perf["match_id"] = self.matchId
+      perf["seasonNumber"] = self.seasonNumber
       performances.append(perf)
     return performances
 
