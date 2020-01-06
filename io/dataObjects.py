@@ -72,6 +72,11 @@ class Match():
       performances.append(perf)
     return performances
 
+def Captain():
+  def __init__(self, name, id):
+    self.name = name
+    self.id = id
+
 
 # for testing purposes
 if __name__ == "__main__":
