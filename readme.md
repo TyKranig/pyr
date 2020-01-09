@@ -108,3 +108,6 @@ Run time should be fine because we can index using match ids but in another proj
 Few new classes that I need to add are
 Match.py
 new method to io.py that updates matches in the database
+
+### 1/8/2020
+First update of 2020! I added the ability to get records from specific seasons a few days ago whcih was a huge advancement, it should make some more specific records such as Captain statistics easier, I also want to add in specific player records as well in order to get more players interested in the data
