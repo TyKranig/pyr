@@ -12,7 +12,7 @@ Xccepted	https://www.dotabuff.com/players/85854786
 Snow	https://www.dotabuff.com/players/107944284
 FrenZyy	https://www.dotabuff.com/players/324781222
 Jamir Amari	https://www.dotabuff.com/players/113931138
-logical	https://www.dotabuff.com/players/189892277/
+logical	https://www.dotabuff.com/players/189892277
 Season2
 Badger	https://www.dotabuff.com/players/78069547
 Zamolxes	https://www.dotabuff.com/players/122929347
@@ -23,7 +23,7 @@ Snow 	https://www.dotabuff.com/players/107944284
 Glotch	https://www.dotabuff.com/players/27883968
 Xccepted	https://www.dotabuff.com/players/85854786
 FrenZyy	https://www.dotabuff.com/players/324781222
-Target	https://www.dotabuff.com/
+Target	https://www.dotabuff.com/players/99410301
 NEAR 	https://www.dotabuff.com/players/275017084
 Absolution (mode turtle)	https://www.dotabuff.com/players/79023108
 Darksmoke	https://www.dotabuff.com/players/101624657
@@ -41,7 +41,7 @@ jokersfist	https://www.dotabuff.com/players/104499370
 Marce	https://www.dotabuff.com/players/128650219
 Bürd	https://www.dotabuff.com/players/153111229
 Season4
-Griff "eggs" Thomas https://www.dotabuff.com/players/11338659
+eggs  https://www.dotabuff.com/players/11338659
 Hyper	https://www.dotabuff.com/players/133354893
 Mattjoman	https://www.dotabuff.com/players/105721163
 Xccepted	https://www.dotabuff.com/players/85854786
