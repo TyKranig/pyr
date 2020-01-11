@@ -9,12 +9,7 @@ setup(
     description="Python bindings for the Dota 2 match API",
 
     install_requires=[
-        "requests"
-        ,"gspread"
-        ,"PyOpenSSL"
-        ,"oauth2client"
-        ,"lxml"
-        ,"pymongo"
+        "requests", "gspread", "PyOpenSSL", "oauth2client", "lxml", "pymongo"
     ],
     entry_points={
     },
