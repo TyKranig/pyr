@@ -7,8 +7,11 @@ from parseCaptains import loadCaptains
 DOTABUFFURL = "https://www.dotabuff.com/matches/%d"
 BROKEGAMES = [5036395844]
 dotaApi = ApiCall()
+parsedCaptains = loadCaptains()
+captains = []
 
-# build an object for storing all of CDL
+for capt in loadCaptains():
+    captains.append(Captain(capt[0], capt[1]))
 
 
 class CDL():
@@ -19,7 +22,6 @@ class CDL():
             self.seasons.append(Season(league[1], league[0]))
 
 
-# build an object for storing a single season
 class Season():
 
     def __init__(self, seasonId, seasonNumber):
@@ -41,7 +43,6 @@ class Season():
             return False
         return True
 
-    # format the matches for insertion
     def formatMatches(self):
         formattedMatches = []
         for match in self.matches:
@@ -53,8 +54,6 @@ class Season():
         for match in self.matches:
             perf = perf + match.formatPerformances()
         return perf
-
-# build an object for storing a single match
 
 
 class Match():
@@ -68,6 +67,8 @@ class Match():
         for player in self.players:
             realSteamId = player["account_id"] + 76561197960265728
             player["steamName"] = dotaApi.getPlayerName(steamids=realSteamId)
+            if player["account_id"] in captains:
+                captains[captains.index(player["account_id"])].
 
     def formatPerformances(self):
         performances = []
@@ -83,6 +84,13 @@ def Captain():
     def __init__(self, name, id):
         self.name = name
         self.id = id
+        self.wins = []
+
+    def __eq__(self, other):
+        return other is self.id
+
+    def addToWins(self, season):
+        
 
 
 # for testing purposes

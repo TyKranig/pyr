@@ -2,6 +2,7 @@
 import datetime
 import time
 import sys
+
 from sheetwriter import SheetWriter
 from dao import DataWriter
 from dataObjects import Season, Match, CDL
@@ -13,6 +14,7 @@ SEASONS = [(1, 10824, "Season1"), (2, 11086, "Season2"),
 gamesColl = DataWriter("games")
 performancesColl = DataWriter("performances")
 captainsColl = DataWriter("captains")
+playersColl = DataWriter("players")
 
 # flag whether or not to clean the database entirely
 
@@ -21,15 +23,16 @@ def buildDatabaseClean(flag):
     if flag:
         print("clearing data")
         gamesColl.clearData()
-        performancesColl.clearData()
+        performancesColl.clearData() 
         captainsColl.clearData()
+        playersColl.clearData()
     cdl = CDL(SEASONS)
     for season in cdl.seasons:
         gamesColl.writeMany(season.formatMatches())
         performancesColl.writeMany(season.formatPerformances())
 
 
-buildDatabaseClean("clean" in sys.argv)
+buildDatabaseClean("--clean" in sys.argv)
 
 for season in SEASONS:
     writer = SheetWriter(season[2])

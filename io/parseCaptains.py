@@ -1,4 +1,3 @@
-from dataObjects import Captain
 from dao import DataWriter
 import io
 import os
