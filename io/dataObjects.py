@@ -67,6 +67,11 @@ class Match():
         for perf in self.players:
             realSteamId = perf["account_id"] + 76561197960265728
             perf["steamName"] = dotaApi.getPlayerName(steamids=realSteamId)
+            team = self.checkTeam(perf)
+            if match["radiant_win"] and team == 'rad' or not match["radiant_win"] and team == 'dire':
+                perf["win"] = 1
+            else:
+                perf["win"] = 0
             if perf["account_id"] in captains:
                 perf["captain"] = 1
 
@@ -84,6 +89,7 @@ class Match():
             return 'rad'
         else:
             return 'dire'
+
 
 # for testing purposes
 if __name__ == "__main__":
