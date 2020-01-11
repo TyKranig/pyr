@@ -1,56 +1,52 @@
-Season1
-Znyper	https://www.dotabuff.com/players/108497309
-ShmeeZZy	https://www.dotabuff.com/players/5810908
-Hope Bones5 (John)	https://www.dotabuff.com/players/130165239
-TheJohan	https://www.dotabuff.com/players/335855616
-Michael J Jackson	https://www.dotabuff.com/players/66198763
-Badger	https://www.dotabuff.com/players/78069547
-Jeff Pest	https://www.dotabuff.com/players/37991695
-USSGuam	https://www.dotabuff.com/players/65471020
-Zamolxes	https://www.dotabuff.com/players/122929347
-Xccepted	https://www.dotabuff.com/players/85854786
-Snow	https://www.dotabuff.com/players/107944284
-FrenZyy	https://www.dotabuff.com/players/324781222
-Jamir Amari	https://www.dotabuff.com/players/113931138
-logical	https://www.dotabuff.com/players/189892277
-Season2
-Badger	https://www.dotabuff.com/players/78069547
-Zamolxes	https://www.dotabuff.com/players/122929347
-JeffPest	https://www.dotabuff.com/players/37991695
-nuttypizza	https://www.dotabuff.com/players/86772964
-Michael J Jackson	https://www.dotabuff.com/players/66198763
-Snow 	https://www.dotabuff.com/players/107944284
-Glotch	https://www.dotabuff.com/players/27883968
-Xccepted	https://www.dotabuff.com/players/85854786
-FrenZyy	https://www.dotabuff.com/players/324781222
-Target	https://www.dotabuff.com/players/99410301
-NEAR 	https://www.dotabuff.com/players/275017084
-Absolution (mode turtle)	https://www.dotabuff.com/players/79023108
-Darksmoke	https://www.dotabuff.com/players/101624657
-killerkarate	https://www.dotabuff.com/players/107268201
-Season3
-Real Sad Doggo	https://www.dotabuff.com/players/112645579
-LoneWolf	https://www.dotabuff.com/players/140846806
-Big Fella	https://www.dotabuff.com/players/121424656
-Absolution (Turtle)	https://www.dotabuff.com/players/79023108
-Alex	https://www.dotabuff.com/players/85854786
-Badger	https://www.dotabuff.com/players/78069547
-Snow	https://www.dotabuff.com/players/107944284
-JeffPest	https://www.dotabuff.com/players/37991695
-jokersfist	https://www.dotabuff.com/players/104499370
-Marce	https://www.dotabuff.com/players/128650219
-Bürd	https://www.dotabuff.com/players/153111229
-Season4
-eggs  https://www.dotabuff.com/players/11338659
-Hyper	https://www.dotabuff.com/players/133354893
-Mattjoman	https://www.dotabuff.com/players/105721163
-Xccepted	https://www.dotabuff.com/players/85854786
-spidez	https://www.dotabuff.com/players/298148498
-Martin	https://www.dotabuff.com/players/269704916
-Snow	https://www.dotabuff.com/players/107944284
-Badger	https://www.dotabuff.com/players/78069547
-USSGuam	https://www.dotabuff.com/players/65471020
-CST	https://www.dotabuff.com/players/149105834
-MxGuire	https://www.dotabuff.com/players/173836647
-Jah	https://www.dotabuff.com/players/303331256
-Cev https://www.dotabuff.com/players/223376902
+108497309
+5810908
+130165239
+335855616
+66198763
+78069547
+37991695
+65471020
+122929347
+85854786
+107944284
+324781222
+113931138
+189892277
+78069547
+122929347
+37991695
+86772964
+66198763
+107944284
+27883968
+85854786
+324781222
+99410301
+275017084
+79023108
+101624657
+107268201
+112645579
+140846806
+121424656
+79023108
+85854786
+78069547
+107944284
+37991695
+104499370
+128650219
+153111229
+11338659
+133354893
+105721163
+85854786
+298148498
+269704916
+107944284
+78069547
+65471020
+149105834
+173836647
+303331256
+223376902

@@ -111,3 +111,9 @@ new method to io.py that updates matches in the database
 
 ### 1/8/2020
 First update of 2020! I added the ability to get records from specific seasons a few days ago whcih was a huge advancement, it should make some more specific records such as Captain statistics easier, I also want to add in specific player records as well in order to get more players interested in the data
+
+### 1/11/2020
+While working on some of the DataObjects I realized that I fell into the Java trap on this project
+When I started the project I instantly thought that objects would make this process easier but it has turned out that for what this project accomplishes,
+using objects is like putting a circle in a square hole, making the project more complicated then it needs to be
+I'm glad I used objects so I could learn about how OOP can be misused, or overused, in the future I may come back and refactor a ton

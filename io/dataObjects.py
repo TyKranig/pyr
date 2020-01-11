@@ -1,17 +1,17 @@
 import json
+import os
 
 from dao import DataWriter
 from apicall import ApiCall
-from parseCaptains import loadCaptains
 
 DOTABUFFURL = "https://www.dotabuff.com/matches/%d"
 BROKEGAMES = [5036395844]
 dotaApi = ApiCall()
-parsedCaptains = loadCaptains()
-captains = []
 
-for capt in loadCaptains():
-    captains.append(Captain(capt[0], capt[1]))
+captains = []
+with open(os.getcwd() + r"\io\static\Captains.txt", "r") as captxt:
+    for line in captxt:
+        captains.append(int(line.strip()))
 
 
 class CDL():
@@ -64,11 +64,11 @@ class Match():
         self.seasonNumber = matchId["seasonNumber"]
         for point in match:
             self.__setattr__(point, match[point])
-        for player in self.players:
-            realSteamId = player["account_id"] + 76561197960265728
-            player["steamName"] = dotaApi.getPlayerName(steamids=realSteamId)
-            if player["account_id"] in captains:
-                captains[captains.index(player["account_id"])].
+        for perf in self.players:
+            realSteamId = perf["account_id"] + 76561197960265728
+            perf["steamName"] = dotaApi.getPlayerName(steamids=realSteamId)
+            if perf["account_id"] in captains:
+                perf["captain"] = 1
 
     def formatPerformances(self):
         performances = []
@@ -79,19 +79,11 @@ class Match():
             performances.append(perf)
         return performances
 
-
-def Captain():
-    def __init__(self, name, id):
-        self.name = name
-        self.id = id
-        self.wins = []
-
-    def __eq__(self, other):
-        return other is self.id
-
-    def addToWins(self, season):
-        
-
+    def checkTeam(self, player):
+        if player["player_slot"] < 5:
+            return 'rad'
+        else:
+            return 'dire'
 
 # for testing purposes
 if __name__ == "__main__":
