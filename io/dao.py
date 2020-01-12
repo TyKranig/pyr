@@ -33,12 +33,27 @@ class GamesDao(DataWriter):
 
 
 class PerformancesDao(DataWriter):
-    def getCaptainWins(self, match):
+    def getWins(self, match):
         pipeline = [
             match,
-            {"$group": { "_id":"$account_id", "wins": {"$sum": "$win"}}},
-            {"$project": {"_id": 0, "account": "$_id", "wins": "$wins"}}
+            {"$group": {
+                "_id": "$account_id",
+                "name": {"$last": "$steamName"},
+                "wins": {"$sum": "$win"}
+            }},
+            {"$project": {"_id": 0, "account": "$_id", "wins": 1, "name": 1}},
+            {"$sort": {"wins": -1}},
+            {"$limit": 10}
         ]
-        print(list(self.collection.aggregate(pipeline)))
+        top = list(self.collection.aggregate(pipeline))
+        for player in top:
+            player["dotabuff"] = "https://www.dotabuff.com/players/%d" % (player["account"])
+        print(top)
 
-# db.performances.aggregate([{$match: {captain: 1}},{$group: { _id:"$account_id", wins: {$sum: "$win"}}}, {$project: {_id: 0, account: "$_id", wins: "$wins"}}])
+# db.performances.aggregate([
+#   {$match: {}},
+#   {$group: { _id:"$account_id", name:{$last: "$steamName"}, wins: {$sum: "$win"}}},
+#   {$project: {_id: 0, account: "$_id", wins: 1, name: 1}},
+#   {$sort: {wins: -1}},
+#   {$limit: 10}
+# ])
