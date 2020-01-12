@@ -48,7 +48,7 @@ class PerformancesDao(DataWriter):
         top = list(self.collection.aggregate(pipeline))
         for player in top:
             player["dotabuff"] = "https://www.dotabuff.com/players/%d" % (player["account"])
-        print(top)
+        return top
 
 # db.performances.aggregate([
 #   {$match: {}},

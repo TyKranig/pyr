@@ -29,9 +29,6 @@ def buildDatabaseClean(flag):
 
 buildDatabaseClean("--clean" in sys.argv)
 
-# performancesColl.getCaptainWins({"$match": {"captain": 1}})
-# performancesColl.getCaptainWins({"$match": {}})
-
 for season in SEASONS:
     writer = SheetWriter(season[2])
 
@@ -53,7 +50,8 @@ for season in SEASONS:
     shortDuration = gamesColl.getData("duration", 10, 1, {"seasonNumber": season[0]})
     writer.writeArray("A57:B66", shortDuration, "string_duration", "dotabuff")
 
-    captWins = performancesColl.getWins({"$match": {"captain": 1}})
+    captWins = performancesColl.getWins({"$match": {"captain": 1, "seasonNumber": season[0]}})
+    writer.writeArray("E2:G11", captWins, "wins", "name", "dotabuff")
 
 writer = SheetWriter("AllTime")
 
@@ -74,3 +72,9 @@ writer.writeArray("A46:B55", longDuration, "string_duration", "dotabuff")
 
 shortDuration = gamesColl.getData("duration", 10, 1, {})
 writer.writeArray("A57:B66", shortDuration, "string_duration", "dotabuff")
+
+captWins = performancesColl.getWins({"$match": {"captain": 1}})
+writer.writeArray("E2:G11", captWins, "wins", "name", "dotabuff")
+
+playerWins = performancesColl.getWins({"$match": {}})
+writer.writeArray("E13:G22", playerWins, "wins", "name", "dotabuff")

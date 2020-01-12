@@ -31,8 +31,6 @@ class Season():
         resp = dotaApi.getLeague(league_id=seasonId)
         print("{0} matches parsing...".format(len(resp)))
         for index, match in enumerate(resp):
-            if index > 2:
-                break
             matchId = match['match_id']
             if matchId not in BROKEGAMES and self.checkForMatch(matchId):
                 print('\r%d' % (index), end='')
