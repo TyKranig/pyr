@@ -1,7 +1,7 @@
 import json
 import os
 
-from dao import DataWriter
+from dao import DataWriter, GamesDao
 from apicall import ApiCall
 
 DOTABUFFURL = "https://www.dotabuff.com/matches/%d"
@@ -31,6 +31,8 @@ class Season():
         resp = dotaApi.getLeague(league_id=seasonId)
         print("{0} matches parsing...".format(len(resp)))
         for index, match in enumerate(resp):
+            if index > 2:
+                break
             matchId = match['match_id']
             if matchId not in BROKEGAMES and self.checkForMatch(matchId):
                 print('\r%d' % (index), end='')
@@ -38,7 +40,7 @@ class Season():
                 self.matches.append(Match(match))
 
     def checkForMatch(self, matchId):
-        gamesColl = DataWriter("games")
+        gamesColl = GamesDao("games")
         if gamesColl.lookForMatch(matchId).count() > 0:
             return False
         return True
