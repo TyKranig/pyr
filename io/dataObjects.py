@@ -9,9 +9,16 @@ BROKEGAMES = [5036395844]
 dotaApi = ApiCall()
 
 captains = []
+allCaptains = []
 with open(os.getcwd() + r"\io\static\Captains.txt", "r") as captxt:
+    seas = []
     for line in captxt:
-        captains.append(int(line.strip()))
+        if "Season" in line and len(seas) > 0:
+            captains.append(seas.copy())
+            seas.clear()
+        if "Season" not in line:
+            allCaptains.append(int(line.strip()))
+            seas.append(int(line.strip()))
 
 
 class CDL():
@@ -39,7 +46,7 @@ class Season():
 
     def checkForMatch(self, matchId):
         gamesColl = GamesDao("games")
-        if gamesColl.lookForMatch(matchId).count() > 0:
+        if len(gamesColl.lookForMatch(matchId)) > 0:
             return False
         return True
 
@@ -72,7 +79,9 @@ class Match():
                 perf["win"] = 1
             else:
                 perf["win"] = 0
-            if perf["account_id"] in captains:
+            if perf["account_id"] in captains[self.seasonNumber - 1]:
+                perf["captain"+str(self.seasonNumber)] = 1
+            if perf["account_id"] in allCaptains:
                 perf["captain"] = 1
 
     def formatPerformances(self):

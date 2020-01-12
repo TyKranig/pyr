@@ -29,7 +29,7 @@ class DataWriter():
 
 class GamesDao(DataWriter):
     def lookForMatch(self, matchId):
-        return self.collection.find({"match_id": matchId})
+        return list(self.collection.find({"match_id": matchId}))
 
 
 class PerformancesDao(DataWriter):
