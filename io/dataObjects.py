@@ -5,7 +5,7 @@ from dao import DataWriter, GamesDao
 from apicall import ApiCall
 
 DOTABUFFURL = "https://www.dotabuff.com/matches/%d"
-BROKEGAMES = [5036395844]
+BROKEGAMES = [5036395844, 5098676102]
 dotaApi = ApiCall()
 
 captains = []
