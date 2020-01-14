@@ -73,7 +73,7 @@ writer.writeArray("A46:B55", longDuration, "string_duration", "dotabuff")
 shortDuration = gamesColl.getData("duration", 10, 1, {})
 writer.writeArray("A57:B66", shortDuration, "string_duration", "dotabuff")
 
-captWins = performancesColl.getWins({"$match": {"captain": 1}})
+captWins = performancesColl.getWins({"$match": {"seasonCaptain": 1}})
 writer.writeArray("E2:G11", captWins, "wins", "name", "dotabuff")
 
 playerWins = performancesColl.getWins({"$match": {}})

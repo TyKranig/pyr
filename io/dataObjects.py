@@ -81,6 +81,7 @@ class Match():
                 perf["win"] = 0
             if perf["account_id"] in captains[self.seasonNumber - 1]:
                 perf["captain"+str(self.seasonNumber)] = 1
+                perf["seasonCaptain"] = 1
             if perf["account_id"] in allCaptains:
                 perf["captain"] = 1
 
