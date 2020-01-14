@@ -50,7 +50,7 @@ for season in SEASONS:
     shortDuration = gamesColl.getData("duration", 10, 1, {"seasonNumber": season[0]})
     writer.writeArray("A57:B66", shortDuration, "string_duration", "dotabuff")
 
-    captWins = performancesColl.getWins({"$match": {"captain": 1, "seasonNumber": season[0]}})
+    captWins = performancesColl.getWins({"$match": {"captain"+str(season[0]): 1, "seasonNumber": season[0]}})
     writer.writeArray("E2:G11", captWins, "wins", "name", "dotabuff")
 
 writer = SheetWriter("AllTime")
