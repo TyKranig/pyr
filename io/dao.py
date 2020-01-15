@@ -39,9 +39,10 @@ class PerformancesDao(DataWriter):
             {"$group": {
                 "_id": "$account_id",
                 "name": {"$last": "$steamName"},
-                "wins": {"$sum": "$win"}
+                "wins": {"$sum": "$win"},
+                "total": {"$sum": 1}
             }},
-            {"$project": {"_id": 0, "account": "$_id", "wins": 1, "name": 1}},
+            {"$project": {"_id": 0, "account": "$_id", "wins": 1, "name": 1, "total": 1}},
             {"$sort": {"wins": -1}},
             {"$limit": 10}
         ]
