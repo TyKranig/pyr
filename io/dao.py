@@ -51,10 +51,25 @@ class PerformancesDao(DataWriter):
             player["dotabuff"] = "https://www.dotabuff.com/players/%d" % (player["account"])
         return top
 
-# db.performances.aggregate([
-#   {$match: {}},
-#   {$group: { _id:"$account_id", name:{$last: "$steamName"}, wins: {$sum: "$win"}}},
-#   {$project: {_id: 0, account: "$_id", wins: 1, name: 1}},
-#   {$sort: {wins: -1}},
-#   {$limit: 10}
-# ])
+    def getWinPercentage(self, match):
+        pipeline = [
+            match,
+            {"$group": {
+                "_id": "$account_id",
+                "name": {"$last": "$steamName"},
+                "wins": {"$sum": "$win"},
+                "total": {"$sum": 1}
+            }},
+            {"$project": {"_id": 0, "account": "$_id", "wins": 1, "name": 1, "total": 1, "winpercentage": {"$divide": ["$wins","$total"]}}},
+            {"$sort": {"winpercentage": -1}},
+            {"$limit": 10}
+        ]
+        top = list(self.collection.aggregate(pipeline))
+        for player in top:
+            player["dotabuff"] = "https://www.dotabuff.com/players/%d" % (player["account"])
+        return top
+
+
+if __name__ == "__main__":
+    dao = PerformancesDao("performances")
+    print(dao.getWinPercentage({"$match": {}}))
