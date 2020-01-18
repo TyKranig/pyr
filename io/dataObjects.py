@@ -112,4 +112,4 @@ class Match():
 
 # for testing purposes
 if __name__ == "__main__":
-    print(MISSED_GAME)
+    seaso = Season(11560, 4)
