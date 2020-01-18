@@ -72,4 +72,4 @@ class PerformancesDao(DataWriter):
 
 if __name__ == "__main__":
     dao = PerformancesDao("performances")
-    print(dao.getWinPercentage({"$match": {}}))
+    print(dao.getWinPercentage({"$match": {"seasonCaptain": 1}}))
