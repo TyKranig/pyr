@@ -20,6 +20,15 @@ with open(os.getcwd() + r"\io\static\Captains.txt", "r") as captxt:
             allCaptains.append(int(line.strip()))
             seas.append(int(line.strip()))
 
+MISSED_GAME = []
+with open(os.getcwd() + r"\io\static\missedGames.txt", "r") as missedtxt:
+    seas = []
+    for line in missedtxt:
+        if "Season" in line and len(seas) > 0:
+            MISSED_GAME.append(seas.copy())
+            seas.clear()
+        if "Season" not in line:
+            seas.append(int(line.strip()))
 
 class CDL():
 
@@ -103,4 +112,4 @@ class Match():
 
 # for testing purposes
 if __name__ == "__main__":
-    season = Season(10824, 1)
+    print(MISSED_GAME)
