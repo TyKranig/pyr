@@ -120,3 +120,6 @@ I'm glad I used objects so I could learn about how OOP can be misused, or overus
 
 ### 1/15/2020
 Update in mid January, this weekend I finished and released the total wins feature plus seasonal records and got some positive feedback, I think the next big update is going to be win percentage and adding in matches that were not ticketed or played on the wrong ticket for whatever reason. After that update I'm not to sure where the project goes, I'm going to keep developing but move to another python project I think. I also am hoping to expand records to RD2L as well, there are currently 20 seasons of RD2L so that would be a lot more data to parse and not front facing features like performance come into play which could be a bigger task to take on.
+
+### 1/19/20
+Ran into a decent road block where old practice matches cannot be pulled from the dota 2 api, this is because if a match isn't ticketed then the match is just counted as a practice match. The only thing I can think of left to add to the app is correcting matches inserted with the wrong season number, due to not quite having the new ticket yet or for some other reason, sometimes a ticket gets used for an inhouse as well.
