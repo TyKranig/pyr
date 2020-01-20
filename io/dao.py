@@ -8,7 +8,7 @@ def clearCol(col):
 
 class DataWriter():
     def __init__(self, box):
-        self.client = pymongo.MongoClient("mongodb://192.168.1.6:27017/")
+        self.client = pymongo.MongoClient("mongodb://192.168.1.3:27017/")
         self.db = self.client["database"]
         self.collection = self.db[box]
 
@@ -62,6 +62,24 @@ class PerformancesDao(DataWriter):
             }},
             {"$project": {"_id": 0, "account": "$_id", "wins": 1, "name": 1, "total": 1, "winpercentage": {"$divide": ["$wins","$total"]}}},
             {"$sort": {"winpercentage": -1}},
+            {"$limit": 10}
+        ]
+        top = list(self.collection.aggregate(pipeline))
+        for player in top:
+            player["dotabuff"] = "https://www.dotabuff.com/players/%d" % (player["account"])
+        return top
+
+    def getLosePercentage(self, match):
+        pipeline = [
+            match,
+            {"$group": {
+                "_id": "$account_id",
+                "name": {"$last": "$steamName"},
+                "wins": {"$sum": "$win"},
+                "total": {"$sum": 1}
+            }},
+            {"$project": {"_id": 0, "account": "$_id", "wins": 1, "name": 1, "total": 1, "losepercentage": {"$divide": ["$wins","$total"]}}},
+            {"$sort": {"losepercentage": 1}},
             {"$limit": 10}
         ]
         top = list(self.collection.aggregate(pipeline))

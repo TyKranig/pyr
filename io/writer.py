@@ -81,3 +81,6 @@ writer.writeArray("E13:G22", playerWins, "wins", "name", "dotabuff")
 
 captainPercentage = performancesColl.getWinPercentage({"$match": {"seasonCaptain": 1}})
 writer.writeArray("E24:G33", captainPercentage, "winpercentage", "name", "dotabuff")
+
+captainPercentage = performancesColl.getLostPercentage({"$match": {"seasonCaptain": 1}})
+writer.writeArray("E35:G44", captainPercentage, "losepercentage", "name", "dotabuff")
