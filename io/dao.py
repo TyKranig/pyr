@@ -60,7 +60,7 @@ class PerformancesDao(DataWriter):
                 "wins": {"$sum": "$win"},
                 "total": {"$sum": 1}
             }},
-            {"$project": {"_id": 0, "account": "$_id", "wins": 1, "name": 1, "total": 1, "winpercentage": {"$divide": ["$wins","$total"]}}},
+            {"$project": {"_id": 0, "account": "$_id", "wins": 1, "name": 1, "total": 1, "winpercentage": {"$divide": ["$wins", "$total"]}}},
             {"$sort": {"winpercentage": -1}},
             {"$limit": 10}
         ]
@@ -78,7 +78,7 @@ class PerformancesDao(DataWriter):
                 "wins": {"$sum": "$win"},
                 "total": {"$sum": 1}
             }},
-            {"$project": {"_id": 0, "account": "$_id", "wins": 1, "name": 1, "total": 1, "losepercentage": {"$divide": ["$wins","$total"]}}},
+            {"$project": {"_id": 0, "account": "$_id", "wins": 1, "name": 1, "total": 1, "losepercentage": {"$divide": ["$wins", "$total"]}}},
             {"$sort": {"losepercentage": 1}},
             {"$limit": 10}
         ]
@@ -89,5 +89,8 @@ class PerformancesDao(DataWriter):
 
 
 if __name__ == "__main__":
-    dao = PerformancesDao("performances")
-    print(dao.getWinPercentage({"$match": {"seasonCaptain": 1}}))
+    # dao = PerformancesDao("performances")
+    # print(dao.getWinPercentage({"$match": {"seasonCaptain": 1}}))
+    dao = GamesDao("games")
+    for game in list(dao.collection.find({}, {"_id": 0, "match_id": 1})):
+        print(game["match_id"])
