@@ -113,10 +113,7 @@ new method to io.py that updates matches in the database
 First update of 2020! I added the ability to get records from specific seasons a few days ago whcih was a huge advancement, it should make some more specific records such as Captain statistics easier, I also want to add in specific player records as well in order to get more players interested in the data
 
 ### 1/11/2020
-While working on some of the DataObjects I realized that I fell into the Java trap on this project
-When I started the project I instantly thought that objects would make this process easier but it has turned out that for what this project accomplishes,
-using objects is like putting a circle in a square hole, making the project more complicated then it needs to be
-I'm glad I used objects so I could learn about how OOP can be misused, or overused, in the future I may come back and refactor a ton
+While working on some of the DataObjects I realized that I fell into the Java trap on this project. When I started the project I instantly thought that objects would make this process easier but it has turned out that for what this project accomplishes, using objects is like putting a circle in a square hole for some projects, making the project more complicated then it needs to be I'm glad I used objects so I could learn about how OOP can be misused, or overused, in the future I may come back and refactor a ton
 
 ### 1/15/2020
 Update in mid January, this weekend I finished and released the total wins feature plus seasonal records and got some positive feedback, I think the next big update is going to be win percentage and adding in matches that were not ticketed or played on the wrong ticket for whatever reason. After that update I'm not to sure where the project goes, I'm going to keep developing but move to another python project I think. I also am hoping to expand records to RD2L as well, there are currently 20 seasons of RD2L so that would be a lot more data to parse and not front facing features like performance come into play which could be a bigger task to take on.

@@ -13,3 +13,4 @@ bundle.crt
 .env
 key.py
 CDL-Sheet-*.json
+*.db
