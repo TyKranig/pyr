@@ -7,7 +7,7 @@ CREATE_MATCH_TABLE = """
 CREATE_PLAYER_TABLE = """
     create table if not exists
     Players
-    (player_id INTEGER, kills int);
+    (player_id INTEGER, kills INTEGER);
 """
 
 INSERT_MATCH = """

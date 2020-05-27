@@ -9,6 +9,11 @@ import queries
 SEASONS = [(1, 10824, "Season1"), (2, 11086, "Season2"),
            (3, 11336, "Season3"), (4, 11560, "Season4")]
 
+PLAYER_COLS = [
+    "match_id", "account_id", "kills", "deaths", "assists", "last_hits", "denies", 
+    "gold_per_min", "xp_per_min"
+]
+
 def setupDatabase():
     conn = sqlite3.connect('games.db')
     c = conn.cursor()
@@ -34,6 +39,13 @@ if __name__ == "__main__":
         )
 
         cursor.execute(queries.INSERT_MATCH, data)
+
+        for performance in response['players']:
+            print(performance)
+            data = (
+                performance['account_id'],
+                performance['kills']
+            )
 
         break
 
