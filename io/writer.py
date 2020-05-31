@@ -7,7 +7,7 @@ from sheetwriter import SheetWriter
 from apicall import ApiCall
 import queries
 
-SEASONS = [(1, 11359, "Season1"), (2, 10904, "Season2"),
+SEASONS = [(1, 10904, "Season1"), (2, 11359, "Season2"),
            (3, 11590, "Season3"), (4, 11811, "Season4")]
 
 DOTABUFF = "https://www.dotabuff.com/matches/{0}"
@@ -67,15 +67,43 @@ if __name__ == "__main__":
 
         writer = SheetWriter(season[2])
 
-        # writer.writeArray("A2:C11", cursor.execute(queries.TOP_PLAYER_KILLS_SEASON, (season[0], )).fetchall())
-        # writer.writeArray("A14:C23", cursor.execute(queries.TOP_PLAYER_DEATHS_SEASON, (season[0], )).fetchall())
-        # writer.writeArray("A26:C35", cursor.execute(queries.TOP_PLAYER_ASSISTS_SEASON, (season[0], )).fetchall())
-        # writer.writeArray("A38:C47", cursor.execute(queries.TOP_PLAYER_CS_GAME_SEASON, (season[0], )).fetchall())
+        writer.writeArray("A2:C11", cursor.execute(queries.TOP_PLAYER_KILLS_SEASON, (season[0], )).fetchall())
+        writer.writeArray("E2:G11", cursor.execute(queries.TOP_PLAYER_KILLS_TOTAL_SEASON, (season[0], )).fetchall())
+        writer.writeArray("I2:K11", cursor.execute(queries.TOP_PLAYER_KILLS_AVG_SEASON, (season[0], )).fetchall())
+
+        writer.writeArray("A14:C23", cursor.execute(queries.TOP_PLAYER_DEATHS_SEASON, (season[0], )).fetchall())
+        writer.writeArray("E14:G23", cursor.execute(queries.TOP_PLAYER_DEATHS_TOTAL_SEASON, (season[0], )).fetchall())
+        writer.writeArray("I14:K23", cursor.execute(queries.TOP_PLAYER_DEATHS_AVG_SEASON, (season[0], )).fetchall())
+
+        writer.writeArray("A26:C35", cursor.execute(queries.TOP_PLAYER_ASSISTS_SEASON, (season[0], )).fetchall())
+        writer.writeArray("E26:G35", cursor.execute(queries.TOP_PLAYER_ASSISTS_TOTAL_SEASON, (season[0], )).fetchall())
+        writer.writeArray("I26:K35", cursor.execute(queries.TOP_PLAYER_ASSISTS_AVG_SEASON, (season[0], )).fetchall())
+
+        writer.writeArray("A38:C47", cursor.execute(queries.TOP_PLAYER_CS_GAME_SEASON, (season[0], )).fetchall())
         writer.writeArray("E38:G47", cursor.execute(queries.TOP_PLAYER_CS_TOTAL_SEASON, (season[0], )).fetchall())
+        writer.writeArray("I38:K47", cursor.execute(queries.TOP_PLAYER_CS_AVG_SEASON, (season[0], )).fetchall())
+
+        writer.writeArray("A50:C59", cursor.execute(queries.TOP_PLAYER_GPM_GAME_SEASON, (season[0], )).fetchall())
+        writer.writeArray("E50:G59", cursor.execute(queries.TOP_PLAYER_GPM_TOTAL_SEASON, (season[0], )).fetchall())
+        writer.writeArray("I50:K59", cursor.execute(queries.TOP_PLAYER_GPM_AVG_SEASON, (season[0], )).fetchall())
 
     writer = SheetWriter("AllTime")
-    # writer.writeArray("A2:C11", cursor.execute(queries.TOP_PLAYER_KILLS_ALLTIME).fetchall())
-    # writer.writeArray("A14:C23", cursor.execute(queries.TOP_PLAYER_DEATHS_ALLTIME).fetchall())
-    # writer.writeArray("A26:C35", cursor.execute(queries.TOP_PLAYER_ASSISTS_ALLTIME).fetchall())
-    # writer.writeArray("A38:C47", cursor.execute(queries.TOP_PLAYER_CS_GAME_ALLTIME).fetchall())
+    writer.writeArray("A2:C11", cursor.execute(queries.TOP_PLAYER_KILLS_ALLTIME).fetchall())
+    writer.writeArray("E2:G11", cursor.execute(queries.TOP_PLAYER_KILLS_TOTAL_ALLTIME).fetchall())
+    writer.writeArray("I2:K11", cursor.execute(queries.TOP_PLAYER_KILLS_AVG_ALLTIME).fetchall())
+
+    writer.writeArray("A14:C23", cursor.execute(queries.TOP_PLAYER_DEATHS_ALLTIME).fetchall())
+    writer.writeArray("E14:G23", cursor.execute(queries.TOP_PLAYER_DEATHS_TOTAL_ALLTIME).fetchall())
+    writer.writeArray("I14:K23", cursor.execute(queries.TOP_PLAYER_DEATHS_AVG_ALLTIME).fetchall())
+
+    writer.writeArray("A26:C35", cursor.execute(queries.TOP_PLAYER_ASSISTS_ALLTIME).fetchall())
+    writer.writeArray("E26:G35", cursor.execute(queries.TOP_PLAYER_ASSISTS_TOTAL_ALLTIME).fetchall())
+    writer.writeArray("I26:K35", cursor.execute(queries.TOP_PLAYER_ASSISTS_AVG_ALLTIME).fetchall())
+
+    writer.writeArray("A38:C47", cursor.execute(queries.TOP_PLAYER_CS_GAME_ALLTIME).fetchall())
     writer.writeArray("E38:G47", cursor.execute(queries.TOP_PLAYER_CS_TOTAL_ALLTIME).fetchall())
+    writer.writeArray("I38:K47", cursor.execute(queries.TOP_PLAYER_CS_AVG_ALLTIME).fetchall())
+
+    writer.writeArray("A50:C59", cursor.execute(queries.TOP_PLAYER_GPM_GAME_ALLTIME).fetchall())
+    writer.writeArray("E50:G59", cursor.execute(queries.TOP_PLAYER_GPM_TOTAL_ALLTIME).fetchall())
+    writer.writeArray("I50:K59", cursor.execute(queries.TOP_PLAYER_GPM_AVG_ALLTIME).fetchall())
