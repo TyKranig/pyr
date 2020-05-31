@@ -67,4 +67,15 @@ if __name__ == "__main__":
 
         writer = SheetWriter(season[2])
 
-        writer.writeArray("A2:C11", cursor.execute(queries.TOP_PLAYER_KILLS).fetchall())
+        # writer.writeArray("A2:C11", cursor.execute(queries.TOP_PLAYER_KILLS_SEASON, (season[0], )).fetchall())
+        # writer.writeArray("A14:C23", cursor.execute(queries.TOP_PLAYER_DEATHS_SEASON, (season[0], )).fetchall())
+        # writer.writeArray("A26:C35", cursor.execute(queries.TOP_PLAYER_ASSISTS_SEASON, (season[0], )).fetchall())
+        # writer.writeArray("A38:C47", cursor.execute(queries.TOP_PLAYER_CS_GAME_SEASON, (season[0], )).fetchall())
+        writer.writeArray("E38:G47", cursor.execute(queries.TOP_PLAYER_CS_TOTAL_SEASON, (season[0], )).fetchall())
+
+    writer = SheetWriter("AllTime")
+    # writer.writeArray("A2:C11", cursor.execute(queries.TOP_PLAYER_KILLS_ALLTIME).fetchall())
+    # writer.writeArray("A14:C23", cursor.execute(queries.TOP_PLAYER_DEATHS_ALLTIME).fetchall())
+    # writer.writeArray("A26:C35", cursor.execute(queries.TOP_PLAYER_ASSISTS_ALLTIME).fetchall())
+    # writer.writeArray("A38:C47", cursor.execute(queries.TOP_PLAYER_CS_GAME_ALLTIME).fetchall())
+    writer.writeArray("E38:G47", cursor.execute(queries.TOP_PLAYER_CS_TOTAL_ALLTIME).fetchall())

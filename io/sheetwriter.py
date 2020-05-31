@@ -25,7 +25,12 @@ class SheetWriter():
     def writeArray(self, range, arr):
         cells = self.sheet.range(range)
         i = 0
+        curr = arr[i]
         for index, cell in enumerate(cells):
-            i += 1
-            cell.value = i
+            if index % 3 == 0 and index > 2:
+                i+= 1
+                curr = arr[i]
+            cell.value = curr[index % 3]
+
+
         self.sheet.update_cells(cells)

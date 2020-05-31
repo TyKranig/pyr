@@ -27,6 +27,70 @@ INSERT_PLAYER = """
     (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 """
 
-TOP_PLAYER_KILLS = """
-    select kills, name, dotabuff from Players order by kills desc limit 10
+
+
+
+TOP_PLAYER_KILLS_SEASON = """
+    select kills, name, dotabuff from Players 
+    where season = ? order by kills desc limit 10
+"""
+
+
+
+TOP_PLAYER_KILLS_ALLTIME = """
+    select kills, name, dotabuff from Players 
+    order by kills desc limit 10
+"""
+
+TOP_PLAYER_DEATHS_SEASON = """
+    select deaths, name, dotabuff from Players 
+    where season = ? order by deaths desc limit 10
+"""
+
+TOP_PLAYER_DEATHS_ALLTIME = """
+    select deaths, name, dotabuff from Players 
+    order by deaths desc limit 10
+"""
+
+TOP_PLAYER_DEATHS_SEASON = """
+    select deaths, name, dotabuff from Players 
+    where season = ? order by deaths desc limit 10
+"""
+
+TOP_PLAYER_DEATHS_ALLTIME = """
+    select deaths, name, dotabuff from Players 
+    order by deaths desc limit 10
+"""
+
+TOP_PLAYER_ASSISTS_SEASON = """
+    select assists, name, dotabuff from Players 
+    where season = ? order by assists desc limit 10
+"""
+
+TOP_PLAYER_ASSISTS_ALLTIME = """
+    select assists, name, dotabuff from Players 
+    order by assists desc limit 10
+"""
+
+TOP_PLAYER_CS_GAME_SEASON = """
+    select last_hits, name, dotabuff from Players 
+    where season = ? order by last_hits desc limit 10
+"""
+
+TOP_PLAYER_CS_GAME_ALLTIME = """
+    select last_hits, name, dotabuff from Players 
+    order by last_hits desc limit 10
+"""
+
+TOP_PLAYER_CS_TOTAL_SEASON = """
+    select sum(last_hits) total_cs, name, dotabuff from Players
+    where season = ?
+    group by account_id
+    order by total_cs desc limit 10
+"""
+
+TOP_PLAYER_CS_TOTAL_ALLTIME = """
+    select sum(last_hits) total_cs, name, dotabuff from Players
+    group by account_id
+    order by total_cs desc limit 10
 """
