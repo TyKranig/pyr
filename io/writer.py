@@ -7,8 +7,9 @@ from sheetwriter import SheetWriter
 from apicall import ApiCall
 import queries
 
-SEASONS = [(1, 10904, "Season1"), (2, 11359, "Season2"),
-           (3, 11590, "Season3"), (4, 11811, "Season4")]
+SEASONS = [(1, 10904, "Season0"), (2, 11359, "Season1"),
+           (3, 11590, "Season2"), (4, 11811, "Season3"),
+           (5, 12068, "Season4")]
 
 DOTABUFF = "https://www.dotabuff.com/matches/{0}"
 
