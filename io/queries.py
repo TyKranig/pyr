@@ -37,9 +37,9 @@ TOP_PLAYER_KILLS_SEASON = """
 """
 
 TOP_PLAYER_KILLS_ALLTIME = """
-    select kills, name, dotabuff from Players 
-    order by kills desc limit 10
+    select kills, name, dotabuff from Players
     where season != 0
+    order by kills desc limit 10
 """
 
 TOP_PLAYER_KILLS_TOTAL_SEASON = """
@@ -51,9 +51,9 @@ TOP_PLAYER_KILLS_TOTAL_SEASON = """
 
 TOP_PLAYER_KILLS_TOTAL_ALLTIME = """
     select sum(kills) total_kills, name, dotabuff from Players
+    where season != 0
     group by account_id
     order by total_kills desc limit 10
-    where season != 0
 """
 
 TOP_PLAYER_KILLS_AVG_SEASON = """
@@ -65,9 +65,9 @@ TOP_PLAYER_KILLS_AVG_SEASON = """
 
 TOP_PLAYER_KILLS_AVG_ALLTIME = """
     select avg(kills) avg_kills, name, dotabuff from Players
+    where season != 0
     group by account_id
     order by avg_kills desc limit 10
-    where season != 0
 """
 
 
@@ -78,9 +78,9 @@ TOP_PLAYER_DEATHS_SEASON = """
 """
 
 TOP_PLAYER_DEATHS_ALLTIME = """
-    select deaths, name, dotabuff from Players 
-    order by deaths desc limit 10
+    select deaths, name, dotabuff from Players
     where season != 0
+    order by deaths desc limit 10
 """
 
 TOP_PLAYER_DEATHS_TOTAL_SEASON = """
@@ -92,9 +92,9 @@ TOP_PLAYER_DEATHS_TOTAL_SEASON = """
 
 TOP_PLAYER_DEATHS_TOTAL_ALLTIME = """
     select sum(deaths) total_deaths, name, dotabuff from Players
+    where season != 0
     group by account_id
     order by total_deaths desc limit 10
-    where season != 0
 """
 
 TOP_PLAYER_DEATHS_AVG_SEASON = """
@@ -106,23 +106,23 @@ TOP_PLAYER_DEATHS_AVG_SEASON = """
 
 TOP_PLAYER_DEATHS_AVG_ALLTIME = """
     select avg(deaths) avg_deaths, name, dotabuff from Players
+    where season != 0
     group by account_id
     order by avg_deaths desc limit 10
-    where season != 0
 """
 
 
 # ASSISTS
 TOP_PLAYER_ASSISTS_SEASON = """
-    select assists, name, dotabuff from Players 
-    where season = ? 
+    select assists, name, dotabuff from Players
+    where season = ?
     order by assists desc limit 10
 """
 
 TOP_PLAYER_ASSISTS_ALLTIME = """
-    select assists, name, dotabuff from Players 
-    order by assists desc limit 10
+    select assists, name, dotabuff from Players
     where season != 0
+    order by assists desc limit 10
 """
 
 TOP_PLAYER_ASSISTS_TOTAL_SEASON = """
@@ -134,9 +134,9 @@ TOP_PLAYER_ASSISTS_TOTAL_SEASON = """
 
 TOP_PLAYER_ASSISTS_TOTAL_ALLTIME = """
     select sum(assists) total_assists, name, dotabuff from Players
+    where season != 0
     group by account_id
     order by total_assists desc limit 10
-    where season != 0
 """
 
 TOP_PLAYER_ASSISTS_AVG_SEASON = """
@@ -148,9 +148,9 @@ TOP_PLAYER_ASSISTS_AVG_SEASON = """
 
 TOP_PLAYER_ASSISTS_AVG_ALLTIME = """
     select avg(assists) avg_assists, name, dotabuff from Players
+    where season != 0
     group by account_id
     order by avg_assists desc limit 10
-    where season != 0
 """
 
 # LAST HITS
@@ -161,9 +161,9 @@ TOP_PLAYER_CS_GAME_SEASON = """
 """
 
 TOP_PLAYER_CS_GAME_ALLTIME = """
-    select last_hits, name, dotabuff from Players 
-    order by last_hits desc limit 10
+    select last_hits, name, dotabuff from Players
     where season != 0
+    order by last_hits desc limit 10
 """
 
 TOP_PLAYER_CS_TOTAL_SEASON = """
@@ -175,9 +175,9 @@ TOP_PLAYER_CS_TOTAL_SEASON = """
 
 TOP_PLAYER_CS_TOTAL_ALLTIME = """
     select sum(last_hits) total_cs, name, dotabuff from Players
+    where season != 0
     group by account_id
     order by total_cs desc limit 10
-    where season != 0
 """
 
 TOP_PLAYER_CS_AVG_SEASON = """
@@ -189,9 +189,9 @@ TOP_PLAYER_CS_AVG_SEASON = """
 
 TOP_PLAYER_CS_AVG_ALLTIME = """
     select avg(last_hits) avg_cs, name, dotabuff from Players
+    where season != 0
     group by account_id
     order by avg_cs desc limit 10
-    where season != 0
 """
 
 
@@ -203,9 +203,9 @@ TOP_PLAYER_GPM_GAME_SEASON = """
 """
 
 TOP_PLAYER_GPM_GAME_ALLTIME = """
-    select gold_per_min, name, dotabuff from Players 
-    order by gold_per_min desc limit 10
+    select gold_per_min, name, dotabuff from Players
     where season != 0
+    order by gold_per_min desc limit 10
 """
 
 TOP_PLAYER_GPM_TOTAL_SEASON = """
@@ -217,9 +217,9 @@ TOP_PLAYER_GPM_TOTAL_SEASON = """
 
 TOP_PLAYER_GPM_TOTAL_ALLTIME = """
     select sum(gold_per_min) total_gpm, name, dotabuff from Players
+    where season != 0
     group by account_id
     order by total_gpm desc limit 10
-    where season != 0
 """
 
 TOP_PLAYER_GPM_AVG_SEASON = """
@@ -231,7 +231,7 @@ TOP_PLAYER_GPM_AVG_SEASON = """
 
 TOP_PLAYER_GPM_AVG_ALLTIME = """
     select avg(gold_per_min) avg_gpm, name, dotabuff from Players
+    where season != 0
     group by account_id
     order by avg_gpm desc limit 10
-    where season != 0
 """
