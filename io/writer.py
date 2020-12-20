@@ -7,9 +7,18 @@ from sheetwriter import SheetWriter
 from apicall import ApiCall
 import queries
 
-SEASONS = [(1, 10904, "Season0"), (2, 11359, "Season1"),
-           (3, 11590, "Season2"), (4, 11811, "Season3"),
-           (5, 12068, "Season4")]
+SEASONS = [
+    # (1, 10904, "Season0"),
+    # (2, 11359, "Season1"),
+    # (3, 11590, "Season2"),
+    # (4, 11811, "Season3"),
+    # (5, 12068, "Season4"),
+    (6, 12300, "Season5")
+]
+
+SEASONS_MD2L = [
+    (1, 12374, "Season7")
+]
 
 DOTABUFF = "https://www.dotabuff.com/matches/{0}"
 
@@ -29,13 +38,30 @@ def checkForMatch(cursor, match_id):
 
 def loadData(cursor, seasonId, seasonNumber):
     dotaApi = ApiCall()
-    resp = dotaApi.getLeague(league_id=seasonId)
+    lastMatch = 1
 
-    print("\n{0} matches parsing...".format(len(resp)))
- 
-    for index, match in enumerate(resp):
+    while(lastMatch > 0):
+        if(lastMatch == 1):
+            # first time through use no last match id
+            resp = dotaApi.getLeague(league_id=seasonId)
+        else:
+            # second time we hit the max so start over
+            resp = dotaApi.getLeague(league_id=seasonId, start_at_match_id=lastMatch)
+        print("\n{0} matches parsing...".format(len(resp)))
+        lastMatch = insterMatches(cursor, seasonId, seasonNumber, dotaApi, resp)
+
+
+
+def insterMatches(cursor, seasonId, seasonNumber, dotaApi, data):
+    last = -1
+    for index, match in enumerate(data):
         print('\r%d' % (index), end = '')
         matchId = match['match_id']
+
+        # set the flag if we reach match max
+        if(index == 126):
+            print("got 127 doing more")
+            last = matchId
 
         if not checkForMatch(cursor, matchId):
             response = dotaApi.getMatch(match_id=matchId)
@@ -54,15 +80,16 @@ def loadData(cursor, seasonId, seasonNumber):
 
                 data = tuple(performance[col] for col in PLAYER_COLS)
                 cursor.execute(queries.INSERT_PLAYER, data)
+    return last
 
 if __name__ == "__main__":
-    conn = sqlite3.connect('games.db')
+    conn = sqlite3.connect('md2l.db')
     cursor = conn.cursor()
 
     cursor.execute(queries.CREATE_MATCH_TABLE)
     cursor.execute(queries.CREATE_PLAYER_TABLE)
 
-    for season in SEASONS:
+    for season in SEASONS_MD2L:
         loadData(cursor, season[1], season[0])
         conn.commit()
 

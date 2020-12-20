@@ -21,6 +21,7 @@ class ApiCall:
 
     def getLeague(self, **kwargs):
         kwargs['key'] = self.key
+        kwargs['tournament_games_only'] = 1
         response = self.session.get(GETMATCHHISTORY, params=kwargs)
         return json.loads(response.text)['result']['matches']
 

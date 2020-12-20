@@ -4,14 +4,17 @@ import json
 from oauth2client.service_account import ServiceAccountCredentials
 from lxml.html import fromstring
 
+# Different Record Books
+books = ["Midwest-Dota-2-League-Records", "League-Of-Lads-Records"]
+keys = ["cdl-sheet-70904f9e1392.json", "CDL-Sheet-18007c70b37d.json"]
 
 class SheetWriter():
     def __init__(self, sheet):
         self.scope = ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/spreadsheets']
-        self.jsonCreds = os.path.join(os.path.dirname(__file__), "CDL-Sheet-18007c70b37d.json")
+        self.jsonCreds = os.path.join(os.path.dirname(__file__), keys[0])
         self.credentials = ServiceAccountCredentials.from_json_keyfile_name(self.jsonCreds, self.scope)
         self.client = gspread.authorize(self.credentials)
-        self.sheet = self.client.open("League-Of-Lads-Records").worksheet(sheet)
+        self.sheet = self.client.open(books[0]).worksheet(sheet)
 
     def writeArray(self, range, data, *args):
         cells = self.sheet.range(range)

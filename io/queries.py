@@ -57,14 +57,14 @@ TOP_PLAYER_KILLS_TOTAL_ALLTIME = """
 """
 
 TOP_PLAYER_KILLS_AVG_SEASON = """
-    select avg(kills) avg_kills, name, dotabuff from Players
+    select ROUND(avg(kills),2) avg_kills, name, dotabuff from Players
     where season = ?
     group by account_id
     order by avg_kills desc limit 10
 """
 
 TOP_PLAYER_KILLS_AVG_ALLTIME = """
-    select avg(kills) avg_kills, name, dotabuff from Players
+    select  ROUND(avg(kills),2) avg_kills, name, dotabuff from Players
     where season != 0
     group by account_id
     order by avg_kills desc limit 10
@@ -98,14 +98,14 @@ TOP_PLAYER_DEATHS_TOTAL_ALLTIME = """
 """
 
 TOP_PLAYER_DEATHS_AVG_SEASON = """
-    select avg(deaths) avg_deaths, name, dotabuff from Players
+    select ROUND(avg(deaths),2) avg_deaths, name, dotabuff from Players
     where season = ?
     group by account_id
     order by avg_deaths desc limit 10
 """
 
 TOP_PLAYER_DEATHS_AVG_ALLTIME = """
-    select avg(deaths) avg_deaths, name, dotabuff from Players
+    select ROUND(avg(deaths),2) avg_deaths, name, dotabuff from Players
     where season != 0
     group by account_id
     order by avg_deaths desc limit 10
@@ -140,14 +140,14 @@ TOP_PLAYER_ASSISTS_TOTAL_ALLTIME = """
 """
 
 TOP_PLAYER_ASSISTS_AVG_SEASON = """
-    select avg(assists) avg_assists, name, dotabuff from Players
+    select ROUND(avg(assists),2) avg_assists, name, dotabuff from Players
     where season = ?
     group by account_id
     order by avg_assists desc limit 10
 """
 
 TOP_PLAYER_ASSISTS_AVG_ALLTIME = """
-    select avg(assists) avg_assists, name, dotabuff from Players
+    select ROUND(avg(assists),2) avg_assists, name, dotabuff from Players
     where season != 0
     group by account_id
     order by avg_assists desc limit 10
@@ -181,14 +181,14 @@ TOP_PLAYER_CS_TOTAL_ALLTIME = """
 """
 
 TOP_PLAYER_CS_AVG_SEASON = """
-    select avg(last_hits) avg_cs, name, dotabuff from Players
+    select ROUND(avg(last_hits),2) avg_cs, name, dotabuff from Players
     where season = ?
     group by account_id
     order by avg_cs desc limit 10
 """
 
 TOP_PLAYER_CS_AVG_ALLTIME = """
-    select avg(last_hits) avg_cs, name, dotabuff from Players
+    select ROUND(avg(last_hits),2) avg_cs, name, dotabuff from Players
     where season != 0
     group by account_id
     order by avg_cs desc limit 10
@@ -223,14 +223,14 @@ TOP_PLAYER_GPM_TOTAL_ALLTIME = """
 """
 
 TOP_PLAYER_GPM_AVG_SEASON = """
-    select avg(gold_per_min) avg_gpm, name, dotabuff from Players
+    select ROUND(avg(gold_per_min),2) avg_gpm, name, dotabuff from Players
     where season = ?
     group by account_id
     order by avg_gpm desc limit 10
 """
 
 TOP_PLAYER_GPM_AVG_ALLTIME = """
-    select avg(gold_per_min) avg_gpm, name, dotabuff from Players
+    select ROUND(avg(gold_per_min),2) avg_gpm, name, dotabuff from Players
     where season != 0
     group by account_id
     order by avg_gpm desc limit 10
