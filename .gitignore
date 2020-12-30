@@ -15,3 +15,5 @@ key.py
 CDL-Sheet-*.json
 *.db
 *.db-journal
+
+*.json

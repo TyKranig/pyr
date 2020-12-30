@@ -2,12 +2,13 @@
 import json
 import sqlite3
 import datetime
+import argparse
 
 from sheetwriter import SheetWriter
 from apicall import ApiCall
 import queries
 
-SEASONS = [
+SEASONS_LOL = [
     # (1, 10904, "Season0"),
     # (2, 11359, "Season1"),
     # (3, 11590, "Season2"),
@@ -19,6 +20,20 @@ SEASONS = [
 SEASONS_MD2L = [
     (1, 12374, "Season7")
 ]
+
+SEASONS_RD2L_MASTERS = [
+    (1, 12593, "Season1")
+]
+
+DBS = ["md2l.db", "lol.db", "rd2l.db"]
+
+LEAGUES = {
+    0 : SEASONS_MD2L,
+    1 : SEASONS_LOL,
+    2 : SEASONS_RD2L_MASTERS
+}
+
+CURRENT_LEAGUE = 0
 
 DOTABUFF = "https://www.dotabuff.com/matches/{0}"
 
@@ -48,11 +63,9 @@ def loadData(cursor, seasonId, seasonNumber):
             # second time we hit the max so start over
             resp = dotaApi.getLeague(league_id=seasonId, start_at_match_id=lastMatch)
         print("\n{0} matches parsing...".format(len(resp)))
-        lastMatch = insterMatches(cursor, seasonId, seasonNumber, dotaApi, resp)
+        lastMatch = insertMatches(cursor, seasonId, seasonNumber, dotaApi, resp)
 
-
-
-def insterMatches(cursor, seasonId, seasonNumber, dotaApi, data):
+def insertMatches(cursor, seasonId, seasonNumber, dotaApi, data):
     last = -1
     for index, match in enumerate(data):
         print('\r%d' % (index), end = '')
@@ -83,17 +96,21 @@ def insterMatches(cursor, seasonId, seasonNumber, dotaApi, data):
     return last
 
 if __name__ == "__main__":
-    conn = sqlite3.connect('md2l.db')
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument("league", type=int)
+    args = parser.parse_args()
+
+    conn = sqlite3.connect(DBS[args.league])
     cursor = conn.cursor()
 
     cursor.execute(queries.CREATE_MATCH_TABLE)
     cursor.execute(queries.CREATE_PLAYER_TABLE)
 
-    for season in SEASONS_MD2L:
+    for season in LEAGUES[args.league]:
         loadData(cursor, season[1], season[0])
         conn.commit()
 
-        writer = SheetWriter(season[2])
+        writer = SheetWriter(season[2], args.league)
 
         writer.writeArray("A2:C11", cursor.execute(queries.TOP_PLAYER_KILLS_SEASON, (season[0], )).fetchall())
         writer.writeArray("E2:G11", cursor.execute(queries.TOP_PLAYER_KILLS_TOTAL_SEASON, (season[0], )).fetchall())
@@ -115,7 +132,7 @@ if __name__ == "__main__":
         writer.writeArray("E50:G59", cursor.execute(queries.TOP_PLAYER_GPM_TOTAL_SEASON, (season[0], )).fetchall())
         writer.writeArray("I50:K59", cursor.execute(queries.TOP_PLAYER_GPM_AVG_SEASON, (season[0], )).fetchall())
 
-    writer = SheetWriter("AllTime")
+    writer = SheetWriter("AllTime", args.league)
     writer.writeArray("A2:C11", cursor.execute(queries.TOP_PLAYER_KILLS_ALLTIME).fetchall())
     writer.writeArray("E2:G11", cursor.execute(queries.TOP_PLAYER_KILLS_TOTAL_ALLTIME).fetchall())
     writer.writeArray("I2:K11", cursor.execute(queries.TOP_PLAYER_KILLS_AVG_ALLTIME).fetchall())
