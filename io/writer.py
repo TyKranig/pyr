@@ -14,7 +14,8 @@ SEASONS_LOL = [
     # (3, 11590, "Season2"),
     # (4, 11811, "Season3"),
     # (5, 12068, "Season4"),
-    (6, 12300, "Season5")
+    (6, 12300, "Season5"),
+    (7, 12671, "Season6"),
 ]
 
 SEASONS_MD2L = [
