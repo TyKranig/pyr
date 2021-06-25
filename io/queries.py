@@ -235,3 +235,31 @@ TOP_PLAYER_GPM_AVG_ALLTIME = """
     group by account_id
     order by avg_gpm desc limit 10
 """
+
+
+
+TOP_PLAYER_XPM_GAME_SEASON = """
+    select xp_per_min, name, dotabuff from Players 
+    where season = ?
+    order by xp_per_min desc limit 10
+"""
+
+TOP_PLAYER_XPM_AVG_SEASON = """
+    select ROUND(avg(xp_per_min),2) avg_xp, name, dotabuff from Players
+    where season = ?
+    group by account_id
+    order by avg_xp desc limit 10
+"""
+
+TOP_PLAYER_XPM_GAME_ALLTIME = """
+    select xp_per_min, name, dotabuff from Players
+    where season != 0
+    order by xp_per_min desc limit 10
+"""
+
+TOP_PLAYER_XPM_AVG_ALLTIME = """
+    select ROUND(avg(xp_per_min),2) avg_xpm, name, dotabuff from Players
+    where season != 0
+    group by account_id
+    order by avg_xpm desc limit 10
+"""

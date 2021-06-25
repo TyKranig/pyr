@@ -14,12 +14,14 @@ SEASONS_LOL = [
     # (3, 11590, "Season2"),
     # (4, 11811, "Season3"),
     # (5, 12068, "Season4"),
-    (6, 12300, "Season5"),
+    # (6, 12300, "Season5"),
     (7, 12671, "Season6"),
+    (8, 13177, "Season7"),
 ]
 
 SEASONS_MD2L = [
-    (1, 12374, "Season7")
+    (1, 12374, "Season7"),
+    (2, 12691, "Season8")
 ]
 
 SEASONS_RD2L_MASTERS = [
@@ -69,7 +71,7 @@ def loadData(cursor, seasonId, seasonNumber):
 def insertMatches(cursor, seasonId, seasonNumber, dotaApi, data):
     last = -1
     for index, match in enumerate(data):
-        print('\r%d' % (index), end = '')
+        print('\r%d' % (index))
         matchId = match['match_id']
 
         # set the flag if we reach match max
@@ -133,6 +135,10 @@ if __name__ == "__main__":
         writer.writeArray("E50:G59", cursor.execute(queries.TOP_PLAYER_GPM_TOTAL_SEASON, (season[0], )).fetchall())
         writer.writeArray("I50:K59", cursor.execute(queries.TOP_PLAYER_GPM_AVG_SEASON, (season[0], )).fetchall())
 
+        writer.writeArray("A62:C71", cursor.execute(queries.TOP_PLAYER_XPM_GAME_SEASON, (season[0], )).fetchall())
+        writer.writeArray("E62:G71", cursor.execute(queries.TOP_PLAYER_XPM_AVG_SEASON, (season[0], )).fetchall())
+
+
     writer = SheetWriter("AllTime", args.league)
     writer.writeArray("A2:C11", cursor.execute(queries.TOP_PLAYER_KILLS_ALLTIME).fetchall())
     writer.writeArray("E2:G11", cursor.execute(queries.TOP_PLAYER_KILLS_TOTAL_ALLTIME).fetchall())
@@ -153,3 +159,6 @@ if __name__ == "__main__":
     writer.writeArray("A50:C59", cursor.execute(queries.TOP_PLAYER_GPM_GAME_ALLTIME).fetchall())
     writer.writeArray("E50:G59", cursor.execute(queries.TOP_PLAYER_GPM_TOTAL_ALLTIME).fetchall())
     writer.writeArray("I50:K59", cursor.execute(queries.TOP_PLAYER_GPM_AVG_ALLTIME).fetchall())
+
+    writer.writeArray("A62:C71", cursor.execute(queries.TOP_PLAYER_XPM_GAME_ALLTIME).fetchall())
+    writer.writeArray("E62:G71", cursor.execute(queries.TOP_PLAYER_XPM_AVG_ALLTIME).fetchall())
