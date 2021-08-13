@@ -4,3 +4,4 @@ PyOpenSSL
 oauth2client
 lxml
 pymongo
+python-dotenv
