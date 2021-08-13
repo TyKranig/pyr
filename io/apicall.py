@@ -22,6 +22,7 @@ class ApiCall:
         self.session = requests.session()
 
     def getLeague(self, **kwargs):
+        print(os.environ)
         kwargs['key'] = self.key
         kwargs['tournament_games_only'] = 1
         response = self.session.get(GETMATCHHISTORY, params=kwargs)
