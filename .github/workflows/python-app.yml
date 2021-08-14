@@ -45,7 +45,7 @@ jobs:
         auth_provider_x509_cert_url: ${{ secrets.auth_provider_x509_cert_url }}
         client_x509_cert_url: ${{ secrets.client_x509_cert_url }}
       run: |
-        echo api_token
+        printenv
     - name: run the script
       run: |
         python io/writer.py 1
