@@ -10,8 +10,7 @@ on:
     branches: [ master ]
 
 jobs:
-  environment:
-    name: python_env
+  environment: python_env
   build:
     runs-on: ubuntu-latest
     steps:
