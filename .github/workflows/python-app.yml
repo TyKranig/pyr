@@ -11,8 +11,6 @@ on:
 
 jobs:
   build:
-    environment:
-      name: python_env
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
