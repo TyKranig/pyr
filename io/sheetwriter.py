@@ -5,14 +5,13 @@ from oauth2client.service_account import ServiceAccountCredentials
 from lxml.html import fromstring
 from dotenv import load_dotenv
 
-load_dotenv()
-
 # Different Record Books
 books = ["Midwest-Dota-2-League-Records", "League-Of-Lads-Records", "RD2L-Masters-Records"]
 keys = ["cdl-sheet-70904f9e1392.json", "CDL-Sheet-18007c70b37d.json", "rd2l-masters.json"]
 
 class SheetWriter():
     def __init__(self, sheet, league):
+        load_dotenv()
         self.scope = ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/spreadsheets']
         self.jsonCreds = os.path.join(os.path.dirname(__file__), keys[league])
         self.jsonDict = {}

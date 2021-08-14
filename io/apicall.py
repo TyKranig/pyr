@@ -4,8 +4,6 @@ import os
 import datetime
 from dotenv import load_dotenv
 
-load_dotenv()
-
 
 GETMATCHHISTORY = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?'
 GETSINGLEMATCH = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V001/?'
@@ -13,6 +11,7 @@ GETPLAYER = 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?'
 
 
 def get_key():
+    load_dotenv()
     return os.environ.get("api_token")
 
 
