@@ -15,7 +15,6 @@ class SheetWriter():
         self.scope = ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/spreadsheets']
         self.jsonCreds = os.path.join(os.path.dirname(__file__), keys[league])
         self.jsonDict = {}
-        print(os.environ)
         self.jsonDict['type'] = os.environ.get("type")
         self.jsonDict['project_id'] = os.environ.get("project_id")
         self.jsonDict['private_key_id'] = os.environ.get("private_key_id")
