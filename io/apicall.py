@@ -2,6 +2,7 @@ import requests
 import json
 import os
 import datetime
+from dotenv import load_dotenv
 
 
 GETMATCHHISTORY = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?'
@@ -10,7 +11,7 @@ GETPLAYER = 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?'
 
 
 def get_key():
-    return os.environ.get("API_TOKEN")
+    return os.environ['API_TOKEN']
 
 
 class ApiCall:

@@ -7,7 +7,6 @@ import argparse
 from sheetwriter import SheetWriter
 from apicall import ApiCall
 import queries
-from dotenv import load_dotenv
 
 SEASONS_LOL = [
     # (1, 10904, "Season0"),
@@ -101,7 +100,6 @@ def insertMatches(cursor, seasonId, seasonNumber, dotaApi, data):
     return last
 
 if __name__ == "__main__":
-    load_dotenv()
     parser = argparse.ArgumentParser(description='Process some integers.')
     parser.add_argument("league", type=int)
     args = parser.parse_args()
