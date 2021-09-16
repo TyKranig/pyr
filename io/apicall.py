@@ -18,6 +18,7 @@ def get_key():
 class ApiCall:
     def __init__(self):
         self.key = get_key()
+        print(self.key)
         self.session = requests.session()
 
     def getLeague(self, **kwargs):
