@@ -12,7 +12,7 @@ GETPLAYER = 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?'
 
 def get_key():
     load_dotenv()
-    return os.environ.get("api_token")
+    return os.environ.get("API_TOKEN")
 
 
 class ApiCall:
