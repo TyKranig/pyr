@@ -43,6 +43,4 @@ jobs:
         auth_provider_x509_cert_url: ${{ secrets.auth_provider_x509_cert_url }}
         client_x509_cert_url: ${{ secrets.client_x509_cert_url }}
       run:
-        echo ${{ secrets.api_key }} | sed 's/./& /g'
-        echo api_token
         python io/writer.py 1
