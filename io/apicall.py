@@ -11,13 +11,13 @@ GETPLAYER = 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?'
 
 
 def get_key():
+    load_dotenv()
     return os.environ['api_token']
 
 
 class ApiCall:
     def __init__(self):
         self.key = get_key()
-        print("wtf is going onnnnnnn" + self.key)
         self.session = requests.session()
 
     def getLeague(self, **kwargs):

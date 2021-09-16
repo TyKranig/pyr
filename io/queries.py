@@ -43,28 +43,28 @@ TOP_PLAYER_KILLS_ALLTIME = """
 """
 
 TOP_PLAYER_KILLS_TOTAL_SEASON = """
-    select sum(kills) total_kills, name, dotabuff from Players
+    select sum(kills) total_kills, name, '' from Players
     where season = ?
     group by account_id
     order by total_kills desc limit 10
 """
 
 TOP_PLAYER_KILLS_TOTAL_ALLTIME = """
-    select sum(kills) total_kills, name, dotabuff from Players
+    select sum(kills) total_kills, name, '' from Players
     where season != 0
     group by account_id
     order by total_kills desc limit 10
 """
 
 TOP_PLAYER_KILLS_AVG_SEASON = """
-    select ROUND(avg(kills),2) avg_kills, name, dotabuff from Players
+    select ROUND(avg(kills),2) avg_kills, name, '' from Players
     where season = ?
     group by account_id
     order by avg_kills desc limit 10
 """
 
 TOP_PLAYER_KILLS_AVG_ALLTIME = """
-    select  ROUND(avg(kills),2) avg_kills, name, dotabuff from Players
+    select  ROUND(avg(kills),2) avg_kills, name, '' from Players
     where season != 0
     group by account_id
     order by avg_kills desc limit 10
@@ -84,28 +84,28 @@ TOP_PLAYER_DEATHS_ALLTIME = """
 """
 
 TOP_PLAYER_DEATHS_TOTAL_SEASON = """
-    select sum(deaths) total_deaths, name, dotabuff from Players
+    select sum(deaths) total_deaths, name, '' from Players
     where season = ?
     group by account_id
     order by total_deaths desc limit 10
 """
 
 TOP_PLAYER_DEATHS_TOTAL_ALLTIME = """
-    select sum(deaths) total_deaths, name, dotabuff from Players
+    select sum(deaths) total_deaths, name, '' from Players
     where season != 0
     group by account_id
     order by total_deaths desc limit 10
 """
 
 TOP_PLAYER_DEATHS_AVG_SEASON = """
-    select ROUND(avg(deaths),2) avg_deaths, name, dotabuff from Players
+    select ROUND(avg(deaths),2) avg_deaths, name, '' from Players
     where season = ?
     group by account_id
     order by avg_deaths desc limit 10
 """
 
 TOP_PLAYER_DEATHS_AVG_ALLTIME = """
-    select ROUND(avg(deaths),2) avg_deaths, name, dotabuff from Players
+    select ROUND(avg(deaths),2) avg_deaths, name, '' from Players
     where season != 0
     group by account_id
     order by avg_deaths desc limit 10
@@ -126,28 +126,28 @@ TOP_PLAYER_ASSISTS_ALLTIME = """
 """
 
 TOP_PLAYER_ASSISTS_TOTAL_SEASON = """
-    select sum(assists) total_assists, name, dotabuff from Players
+    select sum(assists) total_assists, name, '' from Players
     where season = ?
     group by account_id
     order by total_assists desc limit 10
 """
 
 TOP_PLAYER_ASSISTS_TOTAL_ALLTIME = """
-    select sum(assists) total_assists, name, dotabuff from Players
+    select sum(assists) total_assists, name, '' from Players
     where season != 0
     group by account_id
     order by total_assists desc limit 10
 """
 
 TOP_PLAYER_ASSISTS_AVG_SEASON = """
-    select ROUND(avg(assists),2) avg_assists, name, dotabuff from Players
+    select ROUND(avg(assists),2) avg_assists, name, '' from Players
     where season = ?
     group by account_id
     order by avg_assists desc limit 10
 """
 
 TOP_PLAYER_ASSISTS_AVG_ALLTIME = """
-    select ROUND(avg(assists),2) avg_assists, name, dotabuff from Players
+    select ROUND(avg(assists),2) avg_assists, name, '' from Players
     where season != 0
     group by account_id
     order by avg_assists desc limit 10
@@ -167,28 +167,28 @@ TOP_PLAYER_CS_GAME_ALLTIME = """
 """
 
 TOP_PLAYER_CS_TOTAL_SEASON = """
-    select sum(last_hits) total_cs, name, dotabuff from Players
+    select sum(last_hits) total_cs, name, '' from Players
     where season = ?
     group by account_id
     order by total_cs desc limit 10
 """
 
 TOP_PLAYER_CS_TOTAL_ALLTIME = """
-    select sum(last_hits) total_cs, name, dotabuff from Players
+    select sum(last_hits) total_cs, name, '' from Players
     where season != 0
     group by account_id
     order by total_cs desc limit 10
 """
 
 TOP_PLAYER_CS_AVG_SEASON = """
-    select ROUND(avg(last_hits),2) avg_cs, name, dotabuff from Players
+    select ROUND(avg(last_hits),2) avg_cs, name, '' from Players
     where season = ?
     group by account_id
     order by avg_cs desc limit 10
 """
 
 TOP_PLAYER_CS_AVG_ALLTIME = """
-    select ROUND(avg(last_hits),2) avg_cs, name, dotabuff from Players
+    select ROUND(avg(last_hits),2) avg_cs, name, '' from Players
     where season != 0
     group by account_id
     order by avg_cs desc limit 10
@@ -208,36 +208,22 @@ TOP_PLAYER_GPM_GAME_ALLTIME = """
     order by gold_per_min desc limit 10
 """
 
-TOP_PLAYER_GPM_TOTAL_SEASON = """
-    select sum(gold_per_min) total_gpm, name, dotabuff from Players
-    where season = ?
-    group by account_id
-    order by total_gpm desc limit 10
-"""
-
-TOP_PLAYER_GPM_TOTAL_ALLTIME = """
-    select sum(gold_per_min) total_gpm, name, dotabuff from Players
-    where season != 0
-    group by account_id
-    order by total_gpm desc limit 10
-"""
-
 TOP_PLAYER_GPM_AVG_SEASON = """
-    select ROUND(avg(gold_per_min),2) avg_gpm, name, dotabuff from Players
+    select ROUND(avg(gold_per_min),2) avg_gpm, name, '' from Players
     where season = ?
     group by account_id
     order by avg_gpm desc limit 10
 """
 
 TOP_PLAYER_GPM_AVG_ALLTIME = """
-    select ROUND(avg(gold_per_min),2) avg_gpm, name, dotabuff from Players
+    select ROUND(avg(gold_per_min),2) avg_gpm, name, '' from Players
     where season != 0
     group by account_id
     order by avg_gpm desc limit 10
 """
 
 
-
+# XPM
 TOP_PLAYER_XPM_GAME_SEASON = """
     select xp_per_min, name, dotabuff from Players 
     where season = ?
@@ -245,7 +231,7 @@ TOP_PLAYER_XPM_GAME_SEASON = """
 """
 
 TOP_PLAYER_XPM_AVG_SEASON = """
-    select ROUND(avg(xp_per_min),2) avg_xp, name, dotabuff from Players
+    select ROUND(avg(xp_per_min),2) avg_xp, name, '' from Players
     where season = ?
     group by account_id
     order by avg_xp desc limit 10
@@ -258,7 +244,7 @@ TOP_PLAYER_XPM_GAME_ALLTIME = """
 """
 
 TOP_PLAYER_XPM_AVG_ALLTIME = """
-    select ROUND(avg(xp_per_min),2) avg_xpm, name, dotabuff from Players
+    select ROUND(avg(xp_per_min),2) avg_xpm, name, '' from Players
     where season != 0
     group by account_id
     order by avg_xpm desc limit 10

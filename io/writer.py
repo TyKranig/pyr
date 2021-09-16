@@ -9,14 +9,14 @@ from apicall import ApiCall
 import queries
 
 SEASONS_LOL = [
-    # (1, 10904, "Season0"),
-    # (2, 11359, "Season1"),
-    # (3, 11590, "Season2"),
-    # (4, 11811, "Season3"),
-    # (5, 12068, "Season4"),
-    # (6, 12300, "Season5"),
-    # (7, 12671, "Season6"),
-    # (8, 13177, "Season7"),
+    (1, 10904, "Season0"),
+    (2, 11359, "Season1"),
+    (3, 11590, "Season2"),
+    (4, 11811, "Season3"),
+    (5, 12068, "Season4"),
+    (6, 12300, "Season5"),
+    (7, 12671, "Season6"),
+    (8, 13177, "Season7"),
     (9, 13450, "Season8"),
 ]
 
@@ -133,7 +133,6 @@ if __name__ == "__main__":
         writer.writeArray("I38:K47", cursor.execute(queries.TOP_PLAYER_CS_AVG_SEASON, (season[0], )).fetchall())
 
         writer.writeArray("A50:C59", cursor.execute(queries.TOP_PLAYER_GPM_GAME_SEASON, (season[0], )).fetchall())
-        writer.writeArray("E50:G59", cursor.execute(queries.TOP_PLAYER_GPM_TOTAL_SEASON, (season[0], )).fetchall())
         writer.writeArray("I50:K59", cursor.execute(queries.TOP_PLAYER_GPM_AVG_SEASON, (season[0], )).fetchall())
 
         writer.writeArray("A62:C71", cursor.execute(queries.TOP_PLAYER_XPM_GAME_SEASON, (season[0], )).fetchall())
@@ -158,7 +157,6 @@ if __name__ == "__main__":
     writer.writeArray("I38:K47", cursor.execute(queries.TOP_PLAYER_CS_AVG_ALLTIME).fetchall())
 
     writer.writeArray("A50:C59", cursor.execute(queries.TOP_PLAYER_GPM_GAME_ALLTIME).fetchall())
-    writer.writeArray("E50:G59", cursor.execute(queries.TOP_PLAYER_GPM_TOTAL_ALLTIME).fetchall())
     writer.writeArray("I50:K59", cursor.execute(queries.TOP_PLAYER_GPM_AVG_ALLTIME).fetchall())
 
     writer.writeArray("A62:C71", cursor.execute(queries.TOP_PLAYER_XPM_GAME_ALLTIME).fetchall())
