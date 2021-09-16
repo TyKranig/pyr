@@ -16,6 +16,7 @@ def get_key():
 class ApiCall:
     def __init__(self):
         self.key = get_key()
+        print("wtf is going onnnnnnn")
         print(self.key)
         self.session = requests.session()
 
