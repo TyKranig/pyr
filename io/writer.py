@@ -72,7 +72,7 @@ def loadData(cursor, seasonId, seasonNumber):
 def insertMatches(cursor, seasonId, seasonNumber, dotaApi, data):
     last = -1
     for index, match in enumerate(data):
-        print('\r%d' % (index))
+        print('\r%d' % (index), end="", flush=True)
         matchId = match['match_id']
 
         # set the flag if we reach match max
@@ -111,6 +111,7 @@ if __name__ == "__main__":
     cursor.execute(queries.CREATE_PLAYER_TABLE)
 
     for season in LEAGUES[args.league]:
+        print(season[1], season[0])
         loadData(cursor, season[1], season[0])
         conn.commit()
 
