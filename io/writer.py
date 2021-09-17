@@ -124,6 +124,8 @@ if __name__ == "__main__":
         writer.writeArray("A14:C23", cursor.execute(queries.TOP_PLAYER_DEATHS_SEASON, (season[0], )).fetchall())
         writer.writeArray("E14:G23", cursor.execute(queries.TOP_PLAYER_DEATHS_TOTAL_SEASON, (season[0], )).fetchall())
         writer.writeArray("I14:K23", cursor.execute(queries.TOP_PLAYER_DEATHS_AVG_SEASON, (season[0], )).fetchall())
+        writer.writeArray("L14:N23", cursor.execute(queries.LOW_PLAYER_DEATHS_AVG_SEASON, (season[0], )).fetchall())
+        writer.writeArray("O14:Q23", cursor.execute(queries.LOW_PLAYER_DEATHS_season, (season[0], )).fetchall())
 
         writer.writeArray("A26:C35", cursor.execute(queries.TOP_PLAYER_ASSISTS_SEASON, (season[0], )).fetchall())
         writer.writeArray("E26:G35", cursor.execute(queries.TOP_PLAYER_ASSISTS_TOTAL_SEASON, (season[0], )).fetchall())
@@ -148,6 +150,8 @@ if __name__ == "__main__":
     writer.writeArray("A14:C23", cursor.execute(queries.TOP_PLAYER_DEATHS_ALLTIME).fetchall())
     writer.writeArray("E14:G23", cursor.execute(queries.TOP_PLAYER_DEATHS_TOTAL_ALLTIME).fetchall())
     writer.writeArray("I14:K23", cursor.execute(queries.TOP_PLAYER_DEATHS_AVG_ALLTIME).fetchall())
+    writer.writeArray("L14:N23", cursor.execute(queries.LOW_PLAYER_DEATHS_AVG_ALLTIME).fetchall())
+    writer.writeArray("O14:Q23", cursor.execute(queries.LOW_PLAYER_DEATHS_alltime).fetchall())
 
     writer.writeArray("A26:C35", cursor.execute(queries.TOP_PLAYER_ASSISTS_ALLTIME).fetchall())
     writer.writeArray("E26:G35", cursor.execute(queries.TOP_PLAYER_ASSISTS_TOTAL_ALLTIME).fetchall())

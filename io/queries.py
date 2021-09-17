@@ -104,6 +104,29 @@ TOP_PLAYER_DEATHS_AVG_SEASON = """
     order by avg_deaths desc limit 10
 """
 
+LOW_PLAYER_DEATHS_AVG_SEASON = """
+    select ROUND(avg(deaths),2) avg_deaths, name, '' from Players
+    where season = ?
+    group by account_id
+    order by avg_deaths asc limit 10
+"""
+LOW_PLAYER_DEATHS_AVG_ALLTIME = """
+    select ROUND(avg(deaths),2) avg_deaths, name, '' from Players
+    group by account_id
+    order by avg_deaths asc limit 10
+"""
+LOW_PLAYER_DEATHS_season = """
+    select sum(deaths) avg_deaths, name, '' from Players
+    where season = ?
+    group by account_id
+    order by avg_deaths asc limit 10
+"""
+LOW_PLAYER_DEATHS_alltime = """
+    select sum(deaths) avg_deaths, name, '' from Players
+    group by account_id
+    order by avg_deaths asc limit 10
+"""
+
 TOP_PLAYER_DEATHS_AVG_ALLTIME = """
     select ROUND(avg(deaths),2) avg_deaths, name, '' from Players
     where season != 0
