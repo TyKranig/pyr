@@ -50,10 +50,21 @@ PLAYER_COLS = [
     "gold_per_min", "xp_per_min", "season", "dotabuff"
 ]
 
+SKIPPED_MATCHES = []
+
 def checkForMatch(cursor, match_id):
     for row in cursor.execute("Select match_id from Matches where match_id = ?", (match_id, )):
         return True
+    if match_id in SKIPPED_MATCHES:
+        print(match_id)
+        return True
     return False
+
+def loadSkipMatches():
+    with open("skipGames") as file:
+        lines = file.readlines()
+        lines = [int(line.rstrip()) for line in lines]
+        return lines
 
 def loadData(cursor, seasonId, seasonNumber):
     dotaApi = ApiCall()
@@ -100,6 +111,7 @@ def insertMatches(cursor, seasonId, seasonNumber, dotaApi, data):
     return last
 
 if __name__ == "__main__":
+    SKIPPED_MATCHES = loadSkipMatches()
     parser = argparse.ArgumentParser(description='Process some integers.')
     parser.add_argument("league", type=int)
     args = parser.parse_args()
